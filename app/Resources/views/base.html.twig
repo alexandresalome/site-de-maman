@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title '???' %} - enviedunplat.fr</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% if app.environment == 'dev' %}
+            <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}" />
+        {% else %}
+            <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}" />
+        {% endif %}
+    </head>
+    <body>
+        {% block body '' %}
+        {% if app.environment == 'dev' %}
+            <script src="{{ asset('assets/js/all.js') }}"></script>
+            <script src="//localhost:35729/livereload.js"></script>
+        {% else %}
+            <script src="{{ asset('assets/js/all.min.js') }}"></script>
+        {% endif %}
+    </body>
+</html>

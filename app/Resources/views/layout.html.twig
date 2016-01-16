@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    Header
+    <hr />
+    {{ render(controller('AppBundle:Default:header')) }}
+    <hr />
+    {% block content '' %}
+    <hr />
+    Footer
+{% endblock %}
