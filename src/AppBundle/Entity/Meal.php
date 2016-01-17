@@ -22,8 +22,8 @@ class Meal
 
     /**
      * @Id
-     * @ManyToOne(targetEntity="Category", nullable=false)
-     * @JoinColumn
+     * @ManyToOne(targetEntity="Category", inversedBy="meals")
+     * @JoinColumn(nullable=false)
      */
     private $category;
 
@@ -38,9 +38,9 @@ class Meal
     private $description;
 
     /**
-     * @Column(type="boolean")
+     * @Column(type="string", length=10)
      */
-    private $isActive = false;
+    private $price;
 
     /**
      * @Column(type="integer")
@@ -50,10 +50,82 @@ class Meal
     /**
      * @Column(type="integer")
      */
-    private $order = 1;
+    private $position = 1;
 
     public function __construct()
     {
         $this->id = Uuid::generateV4();
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDelay()
+    {
+        return $this->delay;
+    }
+
+    public function setDelay($delay)
+    {
+        $this->delay = $delay;
+
+        return $this;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
     }
 }

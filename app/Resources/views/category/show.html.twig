@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title category.name %}
+
+{% set header_active = category.slug %}
+
+{% block content %}
+    <div class="menu">
+        <h2>{{ category.name }}</h2>
+        {% for meal in category.meals %}
+            <div class="meal">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        {% if false %}
+                            <img src="..." alt="...">
+                        {% else %}
+                            <div class="no-photo">
+                                Aucune photo
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-9">
+                        <h4>{{ meal.name }}</h4>
+                        <p>{{ meal.description }}</p>
+                        <div class="input-group btn-add-to-cart">
+                            <input type="number" class="form-control" aria-label="Quantité" value="1" name="quantity" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p><em>Cette catégorie est vide. Revenez prochainement, vous trouverez peut-être des nouveaux plats !</em></p>
+        {% endfor %}
+    </div>
+{% endblock %}

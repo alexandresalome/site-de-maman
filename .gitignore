@@ -1,6 +1,7 @@
 /app/config/parameters.yml
 /bin/*
 !/bin/console
+!/bin/reset
 /node_modules
 /phpunit.xml
 /var/*

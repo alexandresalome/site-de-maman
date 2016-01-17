@@ -2,10 +2,16 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Util\Uuid;
+use Behat\Transliterator\Transliterator;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="CategoryRepository")
  */
 class Category
 {
@@ -16,18 +22,34 @@ class Category
     private $id;
 
     /**
+     * @OneToMany(targetEntity="Meal", mappedBy="category")
+     */
+    private $meals;
+
+    /**
      * @Column(type="string", length=128)
      */
     private $name;
 
     /**
+     * @Column(type="string", length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @Column(type="integer")
      */
-    private $order = 1;
+    private $position = 1;
 
     public function __construct()
     {
         $this->id = Uuid::generateV4();
+        $this->meals = new ArrayCollection();
+    }
+
+    public function getMeals()
+    {
+        return $this->meals;
     }
 
     public function getName()
@@ -35,21 +57,27 @@ class Category
         return $this->name;
     }
 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
+        $this->slug = Transliterator::urlize($name);
 
         return $this;
     }
 
-    public function getOrder()
+    public function getPosition()
     {
-        return $this->order;
+        return $this->position;
     }
 
-    public function setOrder($order)
+    public function setPosition($position)
     {
-        $this->order = $order;
+        $this->position = $position;
 
         return $this;
     }

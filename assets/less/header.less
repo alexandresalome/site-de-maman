@@ -1,0 +1,30 @@
+.edp-header {
+    height: 100px;
+
+    background-image: url(/images/header-background-400.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    > .container {
+        padding-top: 30px;
+
+        > a.brand {
+            text-shadow: 0px 0px 7px #000;
+            font-weight: bold;
+            color: white;
+            font-size: 2em;
+        }
+    }
+}
+
+@media only screen and (min-width: 400px) {
+    .edp-header {
+        background-image: url(/images/header-background-800.jpg);
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .edp-header {
+        background-image: url(/images/header-background-1300.jpg);
+    }
+}

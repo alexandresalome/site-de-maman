@@ -15,8 +15,11 @@ class DefaultController extends Controller
         return $this->render('default/homepage.html.twig');
     }
 
-    public function headerAction()
+    public function headerAction($active = null)
     {
-        return $this->render('default/_header.html.twig');
+        return $this->render('default/_header.html.twig', array(
+            'categories' => $this->getDoctrine()->getRepository('AppBundle:Category')->findOrderedByPosition(),
+            'active' => $active
+        ));
     }
 }
