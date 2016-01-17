@@ -1,6 +1,42 @@
 .cart-panel {
+    width: 300px;
+    padding: 0.3em;
+
     p.empty {
-        padding: 1em 0 0.5em 0;
         text-align: center;
     }
+
+    > table {
+        width: 100%;
+
+        td.quantity {
+            text-align: right;
+            width: 10%;
+            color: #aaa;
+        }
+
+        td.name {
+            padding-left: 10px;
+        }
+
+        td.price {
+            text-align: right;
+        }
+    }
+
+    tr.total {
+        > td {
+            padding-top: 10px;
+            text-align: right;
+        }
+    }
+
+    p.show {
+        text-align: center;
+    }
+}
+
+#cart-panel .dropdown-menu {
+    left: auto;
+    right: 0;
 }

@@ -1,13 +1,11 @@
 {% extends 'layout.html.twig' %}
 
-{% block title category.name %}
-
-{% set header_active = category.slug %}
+{% block title 'Votre panier' %}
 
 {% block content %}
     <div class="menu">
-        <h2>{{ category.name }}</h2>
-        {% for meal in category.meals %}
+        <h2>Votre panier</h2>
+        {% for row in cart.rows %}
             <div class="meal">
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3">
@@ -20,10 +18,11 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9">
-                        <h4>{{ meal.name }} <small>{{ meal.price }}&nbsp;€</h4>
-                        <p>{{ meal.description }}</p>
+                        <h4 class="pull-right">{{ row.price }}&nbsp;€</h4>
+                        <h4>{{ row.quantity }}x {{ row.meal.name }} <small>{{ row.meal.price }}&nbsp;€/unité</small></h4>
+                        <p>{{ row.meal.description }}</p>
                         <div class="input-group btn-add-to-cart">
-                            <input data-url="{{ path('cart_setMeal') }}" data-mode="add" data-meal="{{ meal.id }}" type="number" class="form-control" aria-label="Quantité" value="1" name="quantity" />
+                            <input data-url="{{ path('cart_setMeal') }}" data-mode="set" data-refresh="refresh" data-meal="{{ row.meal.id }}" type="number" class="form-control" aria-label="Quantité" value="{{ row.quantity }}" name="quantity" />
                             <div class="input-group-btn">
                                 <button class="btn btn-success">
                                     <i class="add glyphicon glyphicon-shopping-cart"></i>
@@ -33,12 +32,15 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+            {% if loop.last %}
+                <hr />
+                <h3 class="text-right">Total : {{ cart.total }}&nbsp;€</h3>
+            {% endif %}
         {% else %}
-            <p><em>Cette catégorie est vide. Revenez prochainement, vous trouverez peut-être des nouveaux plats !</em></p>
+            <p><strong>Votre panier est vide</strong>. Utilisez le menu pour accéder aux diférents plats et faire votre sélection.</p>
         {% endfor %}
     </div>
 {% endblock %}

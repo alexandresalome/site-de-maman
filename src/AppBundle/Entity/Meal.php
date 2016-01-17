@@ -21,7 +21,6 @@ class Meal
     private $id;
 
     /**
-     * @Id
      * @ManyToOne(targetEntity="Category", inversedBy="meals")
      * @JoinColumn(nullable=false)
      */
@@ -55,6 +54,11 @@ class Meal
     public function __construct()
     {
         $this->id = Uuid::generateV4();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getName()

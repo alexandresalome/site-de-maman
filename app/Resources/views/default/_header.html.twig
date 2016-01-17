@@ -6,20 +6,7 @@
 
 <div class="nav-categories-wrapper">
     <div class="container">
-        <ul class="nav pull-right">
-            <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="glyphicon glyphicon-shopping-cart"></i>
-                    Votre panier (0)
-                    <i class="caret"></i>
-                </a>
-                <div class="dropdown-menu">
-                    <div class="cart-panel">
-                        <p class="empty"><em>Votre panier est actuellement vide</em></p>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        {{ render(controller('AppBundle:Cart:panel')) }}
         <ul class="nav nav-categories">
             {% for category in categories %}
                 <li{% if category.slug == active|default %} class="active"{% endif %}><a href="{{ path('category_show', {slug: category.slug}) }}">{{ category.name }}</a></li>
