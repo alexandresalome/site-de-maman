@@ -1,6 +1,47 @@
+$(document).on('click', '.btn-edit-cart button', function (evt) {
+    var $btn = $(evt.currentTarget);
+    var $input = $btn.parent().prev();
+    var $btns = $btn.parent().find('.btn');
+
+    var url    = $input.attr('data-url');
+    var mealId = $input.attr('data-meal');
+
+    if ($btn.hasClass('btn-success')) {
+        var val    = $input.val();
+    } else {
+        var val = 0;
+    }
+
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    $btns.attr('disabled', true);
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: {
+            meal: mealId,
+            mode: 'set',
+            quantity: val
+        },
+
+        error: function () {
+            $btns.attr('disabled', false);
+            window.location.reload();
+        },
+
+        success: function () {
+            $btns.attr('disabled', false);
+            window.location.reload();
+        }
+    });
+});
+
 $(document).on('click', '.btn-add-to-cart button', function (evt) {
     var $btn = $(evt.currentTarget);
     var $input = $btn.parent().prev();
+    var $alert = $btn.parents('.add-to-cart').find('.alert');
 
     evt.preventDefault();
     evt.stopPropagation();
@@ -9,7 +50,6 @@ $(document).on('click', '.btn-add-to-cart button', function (evt) {
 
     var val    = $input.val();
     var url    = $input.attr('data-url');
-    var mode    = $input.attr('data-mode');
     var mealId = $input.attr('data-meal');
 
     $btn.find('.add').fadeOut(function () {
@@ -19,7 +59,7 @@ $(document).on('click', '.btn-add-to-cart button', function (evt) {
                 method: 'POST',
                 data: {
                     meal: mealId,
-                    mode: mode,
+                    mode: 'add',
                     quantity: val
                 },
 
@@ -36,22 +76,22 @@ $(document).on('click', '.btn-add-to-cart button', function (evt) {
                 },
 
                 success: function (resp) {
-                    if ($input.attr('data-refresh') == 'refresh') {
-                        $btn.attr('disabled', false);
-                        window.location.reload();
-                    }
                     $cartPanel = $("#cart-panel");
                     $cartPanel.fadeOut(function () {
                         $cartPanel.html(resp).fadeIn();
                     });
                     $btn.find('.wait').fadeOut(function () {
                         $btn.find('.ok').fadeIn();
+                        $alert.slideDown();
                         setTimeout(function () {
                             $btn.find('.ok').fadeOut(function () {
                                 $btn.find('.add').fadeIn();
                                 $btn.attr('disabled', false);
                             });
                         }, 1000);
+                        setTimeout(function () {
+                            $alert.slideUp();
+                        }, 6000);
                     });
                 }
             })

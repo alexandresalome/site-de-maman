@@ -7,3 +7,23 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    twig.currency:
+        class: AppBundle\Price\Twig\PriceExtension
+        tags:
+            - { name: twig.extension, alias: price }
+
+    twig.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension, alias: intl }
+
+    planning:
+        class: AppBundle\Service\Planning
+        arguments: [ "@doctrine.orm.default_entity_manager" ]
+
+    form.type.order:
+        class: AppBundle\Form\Type\OrderType
+        arguments: [ "@planning" ]
+        tags:
+            - { name: form.type }

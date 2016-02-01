@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Meal;
+use AppBundle\Price\Price;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadMealData extends Fixture
@@ -68,7 +69,7 @@ class LoadMealData extends Fixture
                     ->setName($name)
                     ->setCategory($category)
                     ->setDescription($mealData['description'])
-                    ->setPrice($mealData['price'])
+                    ->setPrice(new Price($mealData['price']))
                     ->setDelay($mealData['delay'])
                     ->setPosition($position)
                 ;

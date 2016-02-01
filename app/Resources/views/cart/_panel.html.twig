@@ -1,9 +1,9 @@
-<div id="cart-panel">
+<div id="cart-panel"{% if not cart.totalCount == 0 %} class="not-empty"{% endif %}>
     <ul class="nav pull-right">
         <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="glyphicon glyphicon-shopping-cart"></i>
-                Votre panier ({{ cart.total }})
+                Votre panier ({{ cart.totalCount }})
                 <i class="caret"></i>
             </a>
             <div class="dropdown-menu">
@@ -15,10 +15,10 @@
                             <tr>
                                 <td class="quantity">{{ row.quantity }}x</td>
                                 <td class="name">{{ row.meal.name }}</td>
-                                <td class="price">{{ row.price }}&nbsp;€</td>
+                                <td class="price">{{ row.price|format_currency }}</td>
                             </tr>
                         {% if loop.last %}
-                            <tr class="total"><td colspan="3"><strong>Total</strong> : {{ cart.totalPrice }}&nbsp;€</td></tr>
+                            <tr class="total"><td colspan="3"><strong>Total</strong> : {{ cart.totalPrice|format_currency }}</td></tr>
                             </table>
                             <hr />
                             <p class="show"><a href="{{ path('cart_show') }}" class="btn btn-success">Voir mon panier</a></p>

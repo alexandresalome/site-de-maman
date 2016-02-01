@@ -1,4 +1,5 @@
 .cart-panel {
+
     width: 300px;
     padding: 0.3em;
 
@@ -36,7 +37,19 @@
     }
 }
 
-#cart-panel .dropdown-menu {
-    left: auto;
-    right: 0;
+#cart-panel {
+
+    .dropdown-menu {
+        left: auto;
+        right: 0;
+    }
+
+    &.not-empty a.dropdown-toggle {
+        &:hover {
+            background-color: #449D44;
+        }
+        background-color: #5CB85C;
+        color: white;
+        font-weight: bold;
+    }
 }

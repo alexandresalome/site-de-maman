@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block title 'Votre panier' %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>Commande du {{ order.createdAt|localizeddate('full', 'none') }}, à {{ order.createdAt|localizeddate('none', 'short') }}</h2>
+    </div>
+
+    <h3>Vos coordonnées</h3>
+    <ul>
+        <li><strong>Nom et prénom</strong> : {{ order.fullname }}</li>
+        <li><strong>Téléphone</strong> : {{ order.phone }}</li>
+        <li><strong>E-mail</strong> : {{ order.email }}</li>
+    </ul>
+
+    <h3>Votre commande</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th width="5%">Qté</th>
+                <th width="70%">Produit</th>
+                <th width="5%" class="text-right">PU</th>
+                <th width="10%" class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in order.order.rows %}
+                <tr>
+                    <td>{{ row.quantity }}x</td>
+                    <td>{{ row.meal }}</td>
+                    <td class="text-right">{{ row.unit_price|format_currency }}</td>
+                    <td class="text-right">{{ row.price|format_currency }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3" class="text-right">Total :</th>
+                <th class="text-right">{{ order.order.total_price|format_currency }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}

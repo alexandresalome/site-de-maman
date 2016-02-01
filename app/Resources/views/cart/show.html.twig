@@ -18,17 +18,19 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9">
-                        <h4 class="pull-right">{{ row.price }}&nbsp;€</h4>
-                        <h4>{{ row.quantity }}x {{ row.meal.name }} <small>{{ row.meal.price }}&nbsp;€/unité</small></h4>
+                        <h4 class="pull-right">{{ row.price|format_currency }}</h4>
+                        <h4>{{ row.quantity }}x {{ row.meal.name }} <small>{{ row.meal.price|format_currency }}/unité</small></h4>
                         <p>{{ row.meal.description }}</p>
-                        <div class="input-group btn-add-to-cart">
-                            <input data-url="{{ path('cart_setMeal') }}" data-mode="set" data-refresh="refresh" data-meal="{{ row.meal.id }}" type="number" class="form-control" aria-label="Quantité" value="{{ row.quantity }}" name="quantity" />
+                        <div class="input-group btn-edit-cart">
+                            <input data-url="{{ path('cart_setMeal') }}" data-meal="{{ row.meal.id }}" type="number" class="form-control" aria-label="Quantité" value="{{ row.quantity }}" name="quantity" />
                             <div class="input-group-btn">
                                 <button class="btn btn-success">
-                                    <i class="add glyphicon glyphicon-shopping-cart"></i>
-                                    <i style="display: none;" class="wait glyphicon glyphicon-hourglass"></i>
-                                    <i style="display: none;" class="ko glyphicon glyphicon-alert"></i>
-                                    <i style="display: none;" class="ok glyphicon glyphicon-ok"></i>
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    Modifier
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                    Supprimer
                                 </button>
                             </div>
                         </div>
@@ -37,7 +39,10 @@
             </div>
             {% if loop.last %}
                 <hr />
-                <h3 class="text-right">Total : {{ cart.total }}&nbsp;€</h3>
+                <h3 class="text-right">Total : {{ cart.totalPrice|format_currency }}</h3>
+                <div class="text-center">
+                    <p><a href="{{ path('cart_order') }}" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Passer commande</a></p>
+                </div>
             {% endif %}
         {% else %}
             <p><strong>Votre panier est vide</strong>. Utilisez le menu pour accéder aux diférents plats et faire votre sélection.</p>

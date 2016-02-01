@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Price\Price;
 use AppBundle\Util\Uuid;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -123,12 +124,12 @@ class Meal
 
     public function getPrice()
     {
-        return $this->price;
+        return new Price($this->price);
     }
 
-    public function setPrice($price)
+    public function setPrice(Price $price)
     {
-        $this->price = $price;
+        $this->price = $price->getAmount();
 
         return $this;
     }

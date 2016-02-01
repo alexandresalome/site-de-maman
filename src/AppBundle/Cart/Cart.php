@@ -2,13 +2,15 @@
 
 namespace AppBundle\Cart;
 
+use AppBundle\Cart\getTotalPrice;
 use AppBundle\Entity\Meal;
+use AppBundle\Price\Price;
 
 class Cart
 {
     private $rows = array();
 
-    public function getTotal()
+    public function getTotalCount()
     {
         $total = 0;
         foreach ($this->rows as $row) {
@@ -20,9 +22,9 @@ class Cart
 
     public function getTotalPrice()
     {
-        $total = '0';
+        $total = new Price('0');
         foreach ($this->rows as $row) {
-            $total = bcadd($total, $row->getPrice());
+            $total = $total->add($row->getPrice());
         }
 
         return $total;
@@ -94,5 +96,20 @@ class Cart
     public function getRows()
     {
         return $this->rows;
+    }
+
+    public function toArray()
+    {
+        $result = array(
+            'total_count' => $this->getTotalCount(),
+            'total_price' => $this->getTotalPrice()->toArray(),
+            'rows'        => array()
+        );
+
+        foreach ($this->rows as $row) {
+            $result['rows'][] = $row->toArray();
+        }
+
+        return $result;
     }
 }

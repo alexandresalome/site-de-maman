@@ -13,12 +13,12 @@ class CartRow
     public function __construct(Meal $meal, $quantity = 1)
     {
         $this->meal = $meal;
-        $this->quantity = $quantity;
+        $this->quantity = (int) $quantity;
     }
 
     public function getPrice()
     {
-        return bcmul($this->quantity, $this->meal->getPrice());
+        return $this->meal->getPrice()->mul($this->quantity);
     }
 
     public function getMeal()
@@ -38,8 +38,18 @@ class CartRow
 
     public function setQuantity($quantity)
     {
-        $this->quantity = $quantity;
+        $this->quantity = (int) $quantity;
 
         return $this;
+    }
+
+    public function toArray()
+    {
+        return array(
+            'meal' => $this->meal->getName(),
+            'quantity' => $this->quantity,
+            'unit_price' => $this->meal->getPrice()->toArray(),
+            'price' => $this->getPrice()->toArray()
+        );
     }
 }

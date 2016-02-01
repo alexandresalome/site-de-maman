@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Cart\Cart;
 use AppBundle\Cart\CartSerializer;
+use AppBundle\Entity\Order;
+use AppBundle\Form\Type\OrderType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +51,36 @@ class CartController extends Controller
     {
         return $this->render('cart/show.html.twig', array(
             'cart' => $this->getCart($request)
+        ));
+    }
+
+    /**
+     * @Route(path="/order", methods="GET|POST", name="cart_order")
+     */
+    public function orderAction(Request $request)
+    {
+        $form = $this->createForm(OrderType::class);
+
+        $cart = $this->getCart($request);
+
+        if ($cart->isEmpty()) {
+            return $this->redirectToRoute('cart_show');
+        }
+
+        if ($form->handleRequest($request)->isValid()) {
+            $order = $form->getData();
+            $order->loadFromCart($this->getCart($request));
+
+            $em = $this->getDoctrine()->getManagerForClass(Order::class);
+            $em->persist($order);
+            $em->flush();
+
+            return $this->redirectToRoute('order_show', array('id' => $order->getId()));
+        }
+
+        return $this->render('cart/order.html.twig', array(
+            'cart' => $cart,
+            'form' => $form->createView(),
         ));
     }
 
