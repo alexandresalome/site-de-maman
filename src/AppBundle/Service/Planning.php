@@ -43,7 +43,7 @@ class Planning
             $vals = array_map(function ($val) use ($date) {
                 return $date.' // '.$val;
             }, $hours);
-            $result[$date] = array_combine($vals, $hours);
+            $result[$date] = array_combine($vals, $vals);
 
             $current->modify('+1 day');
         }

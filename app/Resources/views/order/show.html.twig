@@ -15,6 +15,7 @@
     </ul>
 
     <h3>Votre commande</h3>
+    <p><strong>Date et heure d'enlèvement</strong> : {{ order.date }}</p>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -41,5 +42,11 @@
             </tr>
         </tfoot>
     </table>
+    <h3>Remarques</h3>
+    {% if order.observations %}
+        <p>{{ order.observations|nl2br }}</p>
+    {% else %}
+        <p><em>Aucune remarque.</em></p>
+    {% endif %}
 
 {% endblock %}

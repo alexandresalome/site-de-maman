@@ -75,6 +75,8 @@ class CartController extends Controller
             $em->persist($order);
             $em->flush();
 
+            $this->cleanCart($request);
+
             return $this->redirectToRoute('order_show', array('id' => $order->getId()));
         }
 
@@ -109,5 +111,10 @@ class CartController extends Controller
         $data = $serializer->serialize($cart);
 
         $request->getSession()->set('cart', $data);
+    }
+
+    private function cleanCart(Request $request)
+    {
+        $request->getSession()->set('cart', null);
     }
 }
