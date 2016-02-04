@@ -1,0 +1,73 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\DomCrawler\Crawler;
+
+class CartControllerTest extends WebTestCase
+{
+    public function testAddToCart()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/menu/plats');
+
+        $this->addToCart('Lasagnes', 3, $crawler, $client);
+
+        $crawler = $client->request('GET', '/cart');
+
+        $this->assertContains('Votre panier', $crawler->text());
+        $this->assertContains('Lasagnes', $crawler->text());
+        $this->assertContains('14,55 €', $crawler->text());
+    }
+
+    public function testOrder()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/menu/plats');
+        $this->addToCart('Lasagnes', 3, $crawler, $client);
+
+        $crawler = $client->request('GET', '/order');
+
+        $form = $crawler->selectButton('Commander')->form();
+        $crawler = $client->submit($form);
+        $this->assertContains('Cette valeur ne doit pas être vide.', $crawler->text());
+
+        $form = $crawler->selectButton('Commander')->form(array(
+            'order[fullname]' => 'Alice Bob',
+            'order[phone]'    => '0123456789',
+            'order[email]'    => 'alice@example.org',
+        ));
+
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+
+        $this->assertContains('Commande du', $crawler->text());
+        $this->assertContains('Alice Bob', $crawler->text());
+    }
+
+    private function addToCart($mealName, $quantity, Crawler $crawler, Client $client)
+    {
+        $titles = $crawler->filter('h4')->reduce(function ($crawler) use ($mealName) {
+            return false !== strpos($crawler->text(), $mealName);
+        });
+
+        if (count($titles) !== 1) {
+            throw new \RuntimeException(sprintf('Expected 1 title containing "%s", found %s.', $mealName, count($titles)));
+        }
+
+        $link = $titles->eq(0)->parents()->first()->filter('input[data-meal]');
+
+        $mealId = $link->attr('data-meal');
+
+        $client->request('POST', '/cart', array(
+            'meal' => $mealId,
+            'mode' => 'add',
+            'quantity' => $quantity
+        ));
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+}
