@@ -1,5 +1,6 @@
 {
-    "name": "asalome/.",
+    "name": "asalome/site-de-maman",
+    "description": "Maman fait de la cuisine",
     "license": "proprietary",
     "type": "project",
     "autoload": {
