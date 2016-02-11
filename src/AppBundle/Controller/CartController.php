@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Cart\Cart;
 use AppBundle\Cart\CartSerializer;
 use AppBundle\Entity\Order;
+use AppBundle\Event\OrderEvent;
+use AppBundle\Event\OrderEvents;
 use AppBundle\Form\Type\OrderType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -74,6 +76,11 @@ class CartController extends Controller
             $em = $this->getDoctrine()->getManagerForClass(Order::class);
             $em->persist($order);
             $em->flush();
+
+            $this->get('event_dispatcher')->dispatch(
+                OrderEvents::ORDER_CREATED,
+                new OrderEvent($order)
+            );
 
             $this->cleanCart($request);
 

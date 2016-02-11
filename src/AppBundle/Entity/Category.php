@@ -47,9 +47,17 @@ class Category
         $this->meals = new ArrayCollection();
     }
 
-    public function getMeals()
+    public function getMeals($activeOnly = true)
     {
-        return $this->meals;
+        $meals = array();
+
+        foreach ($this->meals as $meal) {
+            if (!$activeOnly || $meal->isActive()) {
+                $meals[] = $meal;
+            }
+        }
+
+        return $meals;
     }
 
     public function getName()

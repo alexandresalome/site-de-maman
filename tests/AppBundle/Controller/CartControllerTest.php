@@ -40,8 +40,17 @@ class CartControllerTest extends WebTestCase
             'order[email]'    => 'alice@example.org',
         ));
 
+        $client->enableProfiler();
+
         $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect());
+        $this->assertTrue($client->getResponse()->isRedirect(), $client->getCrawler()->text());
+
+        $collector = $client->getProfile()->getCollector('swiftmailer');
+        $this->assertEquals(1, $collector->getMessageCount());
+        $message = $collector->getMessages()[0];
+        $this->assertEquals(array('owner@example.org' => "Owner"), $message->getTo());
+        $this->assertContains('!!!', $message->getSubject());
+
         $crawler = $client->followRedirect();
 
         $this->assertContains('Commande du', $crawler->text());

@@ -41,6 +41,12 @@ class LoadMealData extends Fixture
                     'description' => 'Steack, Pâtes',
                     'price' => '2.00',
                     'delay' => 1
+                ),
+                'Pâtes au caca' => array(
+                    'description' => 'Le caca c\'est délicieux, mais ça coûte cher.',
+                    'price' => '14.35',
+                    'delay' => 1,
+                    'active' => false
                 )
             ),
             'Desserts' => array(
@@ -73,6 +79,10 @@ class LoadMealData extends Fixture
                     ->setDelay($mealData['delay'])
                     ->setPosition($position)
                 ;
+
+                if (isset($mealData['active'])) {
+                    $meal->setActive($mealData['active']);
+                }
 
                 $manager->persist($meal);
             }

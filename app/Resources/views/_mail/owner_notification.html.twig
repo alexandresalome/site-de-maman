@@ -1,0 +1,9 @@
+{% block subject 'Maman, t\'as une commande !!!' %}
+
+{% block body_html %}
+    <p><strong>Nom et prénom</strong> : {{ order.fullname }}</p>
+{% endblock %}
+
+{% block body_text %}
+Nom et prénom : {{ order.fullname }}
+{% endblock %}

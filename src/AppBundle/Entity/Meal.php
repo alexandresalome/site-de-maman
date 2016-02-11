@@ -52,6 +52,11 @@ class Meal
      */
     private $position = 1;
 
+    /**
+     * @Column(type="boolean")
+     */
+    private $active = true;
+
     public function __construct()
     {
         $this->id = Uuid::generateV4();
@@ -130,6 +135,18 @@ class Meal
     public function setPrice(Price $price)
     {
         $this->price = $price->getAmount();
+
+        return $this;
+    }
+
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active = true)
+    {
+        $this->active = $active;
 
         return $this;
     }

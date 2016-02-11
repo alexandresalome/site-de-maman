@@ -27,3 +27,9 @@ services:
         arguments: [ "@planning" ]
         tags:
             - { name: form.type }
+
+    notification:
+        class: AppBundle\Service\Notification
+        arguments: [ "@twig", "@mailer", "%owner_recipient%" ]
+        tags:
+            - { name: kernel.event_subscriber }

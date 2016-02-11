@@ -13,3 +13,5 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     admin_password: admin
+
+    owner_recipient: { "owner@example.org": "Owner" }
