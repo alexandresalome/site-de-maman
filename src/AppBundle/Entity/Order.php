@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="OrderRepository")
  * @Table(name="`order`")
  */
 class Order
@@ -97,6 +97,13 @@ class Order
     public function getOrder()
     {
         return $this->order;
+    }
+
+    public function setOrder(array $order)
+    {
+        $this->order = $order;
+
+        return $this;
     }
 
     public function getFullname()

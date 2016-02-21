@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% set admin_breadcrumb = admin_breadcrumb|default(null) %}
+    <div class="container">
+        <div class="page-header">
+            <h3>
+                {% if admin_breadcrumb is null %}
+                    Commandes
+                {% else %}
+                    <a href="{{ path('admin_orders') }}">Commandes</a>
+                    {% for crumb in admin_breadcrumb %}
+                        {% if loop.first or not loop.last %}
+                            &raquo;
+                        {% endif %}
+                        {{ crumb.label }}
+                    {% endfor %}
+                {% endif %}
+            </h3>
+        </div>
+        {% block content '' %}
+    </div>
+{% endblock %}
