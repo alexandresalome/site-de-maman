@@ -1,6 +1,12 @@
 {% extends "layout-admin.html.twig" %}
 
+{% import "_order_macros.html.twig" as order_macros %}
+
 {% block title 'Commandes' %}
+
+{% set admin_breadcrumb = [
+    {label: 'Commandes'},
+] %}
 
 {% block content %}
     <table class="table table-striped table-bordered table-hovered">
@@ -14,9 +20,9 @@
         </tr>
         {% for order in orders %}
             <tr>
-                <td><a href="{{ path('admin_order', {id: order.id}) }}" class="btn btn-xs btn-default">Ouvrir</a></td>
+                <td><a href="{{ path('admin_order_show', {id: order.id}) }}" class="btn btn-xs btn-default">Ouvrir</a></td>
                 <td>{{ order.fullname }}</td>
-                <td>{{ order.createdAt|localizeddate('full', 'short') }}</td>
+                <td>{{ order_macros.order_creation(order) }}</td>
                 <td>{{ order.date }}</td>
                 <td>{{ order.order.total_count }}</td>
                 <td>{{ order.order.total_price|format_currency }}</td>

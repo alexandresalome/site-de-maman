@@ -3,7 +3,8 @@
 {% block title order.fullname ~ ' pour le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short') %}
 
 {% set admin_breadcrumb = [
-    {label: order.fullname ~ ', le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short') }
+    {label: 'Commandes', href: path('admin_order_index')},
+    {label: order.fullname ~ ', le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short')},
 ] %}
 
 {% block content %}
