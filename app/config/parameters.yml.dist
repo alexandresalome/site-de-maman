@@ -17,3 +17,4 @@ parameters:
     owner_recipient: { "owner@example.org": "Owner" }
 
     analytics_id: ~
+    sitename: "Site de maman"

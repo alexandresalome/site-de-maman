@@ -41,6 +41,7 @@ twig:
         - 'bootstrap_3_horizontal_layout.html.twig'
     globals:
         analytics_id: %analytics_id%
+        sitename: %sitename%
 
 # Doctrine Configuration
 doctrine:

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title '???' %} - enviedunplat.fr</title>
+        <title>{% block title '???' %} - {{ sitename }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% if app.environment == 'dev' %}
             <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}" />
