@@ -7,7 +7,8 @@
         <tr>
             <th width="5%">&nbsp;</th>
             <th>Nom complet</th>
-            <th>Date de création</th>
+            <th>Date et heure</th>
+            <th>Enlèvement</th>
             <th>Nombre de produits</th>
             <th>Total</th>
         </tr>
@@ -15,9 +16,14 @@
             <tr>
                 <td><a href="{{ path('admin_order', {id: order.id}) }}" class="btn btn-xs btn-default">Ouvrir</a></td>
                 <td>{{ order.fullname }}</td>
-                <td>{{ order.createdAt|localizeddate('full', 'none') }}</td>
+                <td>{{ order.createdAt|localizeddate('full', 'short') }}</td>
+                <td>{{ order.date }}</td>
                 <td>{{ order.order.total_count }}</td>
                 <td>{{ order.order.total_price|format_currency }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="info text-center">Aucune commande :) Patience maman, patience...</td>
             </tr>
         {% endfor %}
     </table>

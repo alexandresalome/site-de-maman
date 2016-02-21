@@ -1,25 +1,39 @@
 {% extends 'layout-admin.html.twig' %}
 
+{% block title order.fullname ~ ' pour le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short') %}
+
 {% set admin_breadcrumb = [
-    {label: order.fullname ~ ', le ' ~ order.createdAt|localizeddate('full', 'none') }
+    {label: order.fullname ~ ', le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short') }
 ] %}
 
 {% block content %}
-    <h4>Coordonnées</h4>
-    <table class="table">
-        <tr>
-            <th width="20%">Nom et prénom</th>
-            <td>{{ order.fullname }}</td>
-        </tr>
-        <tr>
-            <th>Téléphone</th>
-            <td>{{ order.phone }}</td>
-        </tr>
-        <tr>
-            <th>E-mail</th>
-            <td>{{ order.email }}</td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-sm-7">
+            <h4>Coordonnées</h4>
+            <table class="table">
+                <tr>
+                    <th>Nom et prénom</th>
+                    <td>{{ order.fullname }}</td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>{{ order.phone }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail</th>
+                    <td>{{ order.email }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-5">
+            <h4>Remarques</h4>
+            {% if order.observations %}
+                <p>{{ order.observations|nl2br }}</p>
+            {% else %}
+                <p><em>Aucune remarque.</em></p>
+            {% endif %}
+        </div>
+    </div>
 
     <h4>Commande</h4>
     <p><strong>Date et heure d'enlèvement</strong> : {{ order.date }}</p>
@@ -49,10 +63,10 @@
             </tr>
         </tfoot>
     </table>
-    <h4>Remarques</h4>
-    {% if order.observations %}
-        <p>{{ order.observations|nl2br }}</p>
-    {% else %}
-        <p><em>Aucune remarque.</em></p>
-    {% endif %}
+    <p>
+        <a class="btn btn-danger" href="{{ path('admin_order_delete', {id: order.id}) }}">
+            <span class="glyphicon glyphicon-fire"></span>
+            Supprimer cette commande
+        </a>
+    </p>
 {% endblock %}

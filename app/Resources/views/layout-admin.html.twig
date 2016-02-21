@@ -5,6 +5,7 @@
     <div class="container">
         <div class="page-header">
             <h3>
+                <a href="{{ path('homepage') }}" class="pull-right btn btn-sm btn-primary"> <span class="glyphicon glyphicon-chevron-left"></span> Revenir au site</a>
                 {% if admin_breadcrumb is null %}
                     Commandes
                 {% else %}
@@ -18,6 +19,11 @@
                 {% endif %}
             </h3>
         </div>
+        {% for message in app.request.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         {% block content '' %}
     </div>
 {% endblock %}

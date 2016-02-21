@@ -1,0 +1,17 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title order.fullname ~ ' pour le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short') %}
+
+{% set admin_breadcrumb = [{label: order.fullname ~ ', le ' ~ order.createdAt|localizeddate('full', 'none') ~ ' à ' ~ order.createdAt|localizeddate('none', 'short')}] %}
+
+{% block content %}
+    <p>Vous êtes sur le point de supprimer la commande.</p>
+    <form action="{{ path('admin_order_delete', {id: order.id}) }}" method="POST">
+        <button class="btn btn-danger">
+            <span class="glyphicon glyphicon-fire"></span>
+            Supprimer
+        </button>
+        ou
+        <a href="{{ path('admin_order', {id: order.id}) }}">Annuler</a>
+    </form>
+{% endblock %}

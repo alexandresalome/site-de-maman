@@ -36,4 +36,25 @@ class AdminController extends Controller
             'order' => $order
         ));
     }
+
+    /**
+     * @Route(path="/admin/commandes/{id}/supprimer", name="admin_order_delete")
+     * @ParamConverter
+     */
+    public function orderDeleteAction(Request $request, Order $order)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($order);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'La commande de '.$order->getFullname().' a bien été supprimée.');
+
+            return $this->redirectToRoute('admin_orders');
+        }
+
+        return $this->render('admin/order_delete.html.twig', array(
+            'order' => $order
+        ));
+    }
 }
