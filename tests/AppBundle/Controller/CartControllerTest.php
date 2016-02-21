@@ -13,20 +13,20 @@ class CartControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/menu/plats');
 
-        $this->addToCart('Lasagnes', 3, $crawler, $client);
+        $this->addToCart('Tartiflette', 3, $crawler, $client);
 
         $crawler = $client->request('GET', '/cart');
 
         $this->assertContains('Votre panier', $crawler->text());
-        $this->assertContains('Lasagnes', $crawler->text());
-        $this->assertContains('14,55 €', $crawler->text());
+        $this->assertContains('Tartiflette', $crawler->text());
+        $this->assertContains('15,00 €', $crawler->text());
     }
 
     public function testOrder()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/menu/plats');
-        $this->addToCart('Lasagnes', 3, $crawler, $client);
+        $this->addToCart('Tartiflette', 3, $crawler, $client);
 
         $crawler = $client->request('GET', '/order');
 

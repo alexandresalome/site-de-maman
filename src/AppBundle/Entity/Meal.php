@@ -33,7 +33,7 @@ class Meal
     private $name;
 
     /**
-     * @Column(type="text")
+     * @Column(type="text", nullable=true)
      */
     private $description;
 

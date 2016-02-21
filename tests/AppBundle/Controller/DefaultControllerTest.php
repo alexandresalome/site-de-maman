@@ -40,7 +40,7 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-        $link = $crawler->selectLink('Entrées')->link();
+        $link = $crawler->selectLink('Entrée')->link();
 
         $crawler = $client->click($link);
 

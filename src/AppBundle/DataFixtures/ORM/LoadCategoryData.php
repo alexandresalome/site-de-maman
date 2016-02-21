@@ -13,10 +13,12 @@ class LoadCategoryData extends Fixture
     public function load(ObjectManager $manager)
     {
         $categories = array(
-            'Entrées',
+            'Apéritif',
+            'Entrée',
+            'Sur le pouce',
+            'Pâtes',
             'Plats',
-            'Desserts',
-            'Sur le pouce'
+            'Desserts'
         );
 
         foreach ($categories as $pos => $name) {
