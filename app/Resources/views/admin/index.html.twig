@@ -1,0 +1,26 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% import "_order_macros.html.twig" as order_macros %}
+
+{% block title 'Admin' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>
+                {% if orders|length == 0 %}
+                    Aucune commande
+                {% elseif orders|length == 1 %}
+                    La dernière commande
+                {% else %}
+                    Les {{ orders|length }} dernières commandes
+                {% endif %}
+            </h3>
+            <ul>
+                {% for order in orders %}
+                    <li><a href="{{ path('admin_order_show', {id: order.id }) }}">{{ order_macros.order_title(order) }}</a></li>
+                {% endfor %}
+            </ul>
+            <p><a class="btn btn-primary" href="{{ path('admin_order_index') }}">Voir toutes les commandes</a></p>
+        </div>
+{% endblock %}

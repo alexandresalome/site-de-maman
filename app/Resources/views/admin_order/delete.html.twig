@@ -1,0 +1,23 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% import "_order_macros.html.twig" as order_macros %}
+
+{% block title 'Supprimer la commande ' ~ order_macros.order_title(order) %}
+
+{% set admin_breadcrumb = [
+    {label: 'Commandes', href: path('admin_order_index')},
+    {label: order_macros.order_title(order), href: path('admin_order_show', {id: order.id})},
+    {label: 'Supprimer'}
+] %}
+
+{% block content %}
+    <p>Vous êtes sur le point de supprimer la commande.</p>
+    <form action="{{ path('admin_order_delete', {id: order.id}) }}" method="POST">
+        <button class="btn btn-danger">
+            <span class="glyphicon glyphicon-fire"></span>
+            Supprimer
+        </button>
+        ou
+        <a href="{{ path('admin_order_show', {id: order.id}) }}">Revenir à la commande</a>
+    </form>
+{% endblock %}

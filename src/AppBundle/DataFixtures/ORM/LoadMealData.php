@@ -25,13 +25,13 @@ class LoadMealData extends Fixture
             'Entrée' => array(
                 'Coquille Saint Jacques' => '3.50',
                 'Coquille aux fruits de mer' => '2.40',
-                'Quiche lorraine (6 parts)' => '3.00',
+                'Quiche lorraine (6 parts)' => '3.50',
                 'Quiche saumon­-brocolis ou saumon­-poireaux' => '4.50'
             ),
             'Sur le pouce' => array(
                 'Ficelle Picarde' => '2.50',
                 'Croque Madame' => '1.50',
-                'Couronne de jambon, fromage (6 parts)' => '6.00',
+                'Couronne de jambon, fromage (6 parts)' => '7.50',
                 'Crêpe au sarazin garnie' => '2.50',
                 'Hamburger' => '2.50'
             ),
