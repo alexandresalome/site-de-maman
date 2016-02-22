@@ -26,14 +26,15 @@ class LoadMealData extends Fixture
                 'Coquille Saint Jacques' => '3.50',
                 'Coquille aux fruits de mer' => '2.40',
                 'Quiche lorraine (6 parts)' => '3.50',
-                'Quiche saumon­-brocolis ou saumon­-poireaux' => '4.50'
+                'Quiche saumon-brocolis ou saumon-poireaux' => '4.50',
             ),
             'Sur le pouce' => array(
                 'Ficelle Picarde' => '2.50',
                 'Croque Madame' => '1.50',
                 'Couronne de jambon, fromage (6 parts)' => '7.50',
                 'Crêpe au sarazin garnie' => '2.50',
-                'Hamburger' => '2.50'
+                'Hamburger' => '2.50',
+                'Pizza' => '5.00',
             ),
             'Pâtes' => array(
                 '6 Cannellonis chêvre, épinards' => '4.50',
@@ -43,7 +44,7 @@ class LoadMealData extends Fixture
                 'Pâtes à la Rosa' => '4.50',
                 'Pennes aux 4 fromages' => '4.50',
                 'Tagliatelles au saumon' => '4.50',
-                'Pâtes aux fruits de mer' => '4.50'
+                'Pâtes aux fruits de mer' => '4.50',
             ),
             'Plats' => array(
                 'Hachis parmentier' => '5.00',
@@ -55,7 +56,7 @@ class LoadMealData extends Fixture
                 'Rouelle avec pomme de terre au four' => '5.00',
                 'Brandade de morue parmentière' => '5.00',
                 'Fricassée de volaille à l\'ancienne, riz pilaf' => '5.00',
-                'Pomme de terre macaire (jambon­-fromage)' => '5.00',
+                'Pomme de terre macaire (jambon-fromage)' => '5.00',
                 'Gratin dauphinois au jambon' => '5.00',
                 'Risotto aux fruits de mer' => '5.00',
                 'Risotto poulet, champignons' => '5.00',
