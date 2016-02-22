@@ -21,6 +21,8 @@
                     <li><a href="{{ path('admin_order_show', {id: order.id }) }}">{{ order_macros.order_title(order) }}</a></li>
                 {% endfor %}
             </ul>
-            <p><a class="btn btn-primary" href="{{ path('admin_order_index') }}">Voir toutes les commandes</a></p>
+            {% if orders|length %}
+                <p><a class="btn btn-primary" href="{{ path('admin_order_index') }}">Voir toutes les commandes</a></p>
+            {% endif %}
         </div>
 {% endblock %}

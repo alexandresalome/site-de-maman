@@ -2,11 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class CartControllerTest extends WebTestCase
+class CartControllerTest extends AppWebTestCase
 {
     public function testAddToCart()
     {

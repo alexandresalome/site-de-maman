@@ -6,10 +6,9 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Meal;
 use AppBundle\Price\Price;
 use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
-class CategoryControllerTest extends WebTestCase
+class CategoryControllerTest extends AppWebTestCase
 {
     private $meal;
     private $client;
@@ -50,17 +49,5 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/menu/plats');
 
         $this->assertNotContains('Inactive', $crawler->text());
-    }
-
-    private function getEntityManager(Client $client)
-    {
-        $kernel = $client->getKernel();
-        $kernel->boot();
-
-        return $kernel
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-        ;
     }
 }
