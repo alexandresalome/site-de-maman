@@ -88,7 +88,7 @@ class AdminOrderControllerTest extends AppWebTestCase
         $this->createOrder($client, 'foo');
         $this->createOrder($client, 'bar');
 
-        $crawler = $client->request('GET', '/admin/accueil');
+        $crawler = $client->request('GET', '/admin');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Les 2 dernières commandes', $crawler->text());

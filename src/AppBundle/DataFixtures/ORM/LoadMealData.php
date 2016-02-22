@@ -101,7 +101,6 @@ class LoadMealData extends Fixture
                 }
 
                 $mealData = array_merge(array(
-                    'delay' => 2,
                     'description' => null,
                 ), $mealData);
 
@@ -111,7 +110,6 @@ class LoadMealData extends Fixture
                     ->setCategory($category)
                     ->setDescription($mealData['description'])
                     ->setPrice(new Price($mealData['price']))
-                    ->setDelay($mealData['delay'])
                     ->setPosition($position)
                 ;
 

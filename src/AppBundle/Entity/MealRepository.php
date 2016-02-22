@@ -4,16 +4,13 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
-class CategoryRepository extends EntityRepository
+class MealRepository extends EntityRepository
 {
     public function findOrderedByPosition()
     {
         return $this
-            ->createQueryBuilder('c')
-            ->select('c, m')
-            ->leftJoin('c.meals', 'm')
-            ->orderBy('c.position', 'ASC')
-            ->addOrderBy('m.position', 'ASC')
+            ->createQueryBuilder('m')
+            ->orderBy('m.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
@@ -22,8 +19,8 @@ class CategoryRepository extends EntityRepository
     public function countAll()
     {
         return $this
-            ->createQueryBuilder('c')
-            ->select('COUNT(c.id)')
+            ->createQueryBuilder('m')
+            ->select('COUNT(m.id)')
             ->getQuery()
             ->getSingleScalarResult()
         ;

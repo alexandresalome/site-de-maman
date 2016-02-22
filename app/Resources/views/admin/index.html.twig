@@ -16,13 +16,28 @@
                     Les {{ orders|length }} dernières commandes
                 {% endif %}
             </h3>
-            <ul>
-                {% for order in orders %}
-                    <li><a href="{{ path('admin_order_show', {id: order.id }) }}">{{ order_macros.order_title(order) }}</a></li>
-                {% endfor %}
-            </ul>
             {% if orders|length %}
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom complet</th>
+                        <th>Enlèvement</th>
+                    </tr>
+                    {% for order in orders %}
+                        <tr>
+                            <td><a href="{{ path('admin_order_show', {id: order.id }) }}">{{ order.fullname }}</a></td>
+                            <td>{{ order.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
                 <p><a class="btn btn-primary" href="{{ path('admin_order_index') }}">Voir toutes les commandes</a></p>
             {% endif %}
         </div>
+        <div class="col-sm-6">
+            <h3>Le menu</h3>
+            <p>Actuellement <strong>{{ category_count }}</strong> catégories pour <strong>{{ meal_count }} plats</strong>.</p>
+            {#
+            <p><a class="btn btn-primary" href="{{ path('admin_menu_index') }}">Gérer le menu</a></p>
+            #}
+        </div>
+    </div>
 {% endblock %}

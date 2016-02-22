@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="MealRepository")
  */
 class Meal
 {
@@ -41,11 +41,6 @@ class Meal
      * @Column(type="string", length=10)
      */
     private $price;
-
-    /**
-     * @Column(type="integer")
-     */
-    private $delay = 1;
 
     /**
      * @Column(type="integer")
@@ -99,18 +94,6 @@ class Meal
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDelay()
-    {
-        return $this->delay;
-    }
-
-    public function setDelay($delay)
-    {
-        $this->delay = $delay;
 
         return $this;
     }

@@ -13,7 +13,7 @@ class AdminControllerTest extends AppWebTestCase
 
         $this->deleteAllOrders($client);
 
-        $crawler = $client->request('GET', '/admin/accueil');
+        $crawler = $client->request('GET', '/admin');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Aucune commande', $crawler->text());
@@ -30,7 +30,7 @@ class AdminControllerTest extends AppWebTestCase
         $this->deleteAllOrders($client);
         $this->createOrder($client, 'foo');
 
-        $crawler = $client->request('GET', '/admin/accueil');
+        $crawler = $client->request('GET', '/admin');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('La dernière commande', $crawler->text());
@@ -48,7 +48,7 @@ class AdminControllerTest extends AppWebTestCase
         $this->createOrder($client, 'foo');
         $this->createOrder($client, 'bar');
 
-        $crawler = $client->request('GET', '/admin/accueil');
+        $crawler = $client->request('GET', '/admin');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Les 2 dernières commandes', $crawler->text());

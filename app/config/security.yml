@@ -20,7 +20,7 @@ security:
         admin:
             pattern: ^/admin
             http_basic:
-                realm: "Administration des commandes"
+                realm: "Zone sécurisé"
 
         main:
             anonymous: ~
