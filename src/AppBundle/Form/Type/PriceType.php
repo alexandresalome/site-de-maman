@@ -20,9 +20,6 @@ class PriceType extends AbstractType implements DataMapperInterface
     {
         $builder
             ->add('amount', NumberType::class)
-            ->add('currency', ChoiceType::class, array(
-                'choices' => array('€' => 'EUR', '£' => 'GBP')
-            ))
             ->setDataMapper($this)
         ;
     }
@@ -36,8 +33,7 @@ class PriceType extends AbstractType implements DataMapperInterface
             'data_class' => Price::class,
             'empty_data' => function (FormInterface $form) {
                 return new Price(
-                    $form->get('amount')->getData(),
-                    $form->get('currency')->getData()
+                    $form->get('amount')->getData()
                 );
             }
         ));
@@ -47,7 +43,6 @@ class PriceType extends AbstractType implements DataMapperInterface
     {
         $forms = iterator_to_array($forms);
         $forms['amount']->setData($data ? $data->getAmount() : 0);
-        $forms['currency']->setData($data ? $data->getCurrency() : 'EUR');
     }
 
     public function mapFormsToData($forms, &$data)
@@ -58,9 +53,6 @@ class PriceType extends AbstractType implements DataMapperInterface
         if ($amount === null) {
             $amount = '0';
         }
-        $data = new Price(
-            $amount,
-            $forms['currency']->getData()
-        );
+        $data = new Price($amount);
     }
 }

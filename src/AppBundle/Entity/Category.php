@@ -62,6 +62,10 @@ class Category
             }
         }
 
+        usort($meals, function ($left, $right) {
+            return $left->getPosition() > $right->getPosition();
+        });
+
         return $meals;
     }
 

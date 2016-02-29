@@ -8,16 +8,30 @@
 ] %}
 
 {% block content %}
-    <h3>Informations générales</h3>
-    {{ form(form) }}
-    <h3>Plats</h3>
-    <table class="table">
-        {% for meal in category.meals %}
-            <tr>
-                <td><a href="{{ path('admin_menu_meal_edit', {id: meal.id}) }}">{{ meal.name }}</a></td>
-            </tr>
-        {% endfor %}
-    </table>
-    <h3 class="text-danger">Zone de danger</h3>
-    <p><a href="{{ path('admin_menu_category_delete', {id: category.id}) }}" class="btn btn-danger">Supprimer cette catégorie</a></p>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Informations générales</h3>
+            {{ form(form) }}
+            <hr />
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    Zone de danger
+                </div>
+                <div class="panel-body">
+                    <p><a href="{{ path('admin_menu_category_delete', {id: category.id}) }}" class="btn btn-danger">Supprimer cette catégorie</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Plats</h3>
+            <table class="table">
+                {% for meal in category.meals %}
+                    <tr>
+                        <td>#{{ meal.position }}</td>
+                        <td><a href="{{ path('admin_menu_meal_edit', {id: meal.id}) }}">{{ meal.name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 {% endblock %}

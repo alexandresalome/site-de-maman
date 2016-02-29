@@ -100,4 +100,25 @@ class AdminMenuController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * @Route(path="/admin/menu/meal/{id}/delete", name="admin_menu_meal_delete")
+     * @ParamConverter
+     */
+    public function mealDeleteAction(Request $request, Meal $meal)
+    {
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($meal);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Le plat '.$meal->getName().' a bien été supprimé.');
+
+            return $this->redirectToRoute('admin_menu_category_edit', array('id' => $meal->getCategory()->getId()));
+        }
+
+        return $this->render('admin_menu/meal_delete.html.twig', array(
+            'meal' => $meal
+        ));
+    }
 }

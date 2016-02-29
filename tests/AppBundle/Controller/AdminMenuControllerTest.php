@@ -65,6 +65,52 @@ class AdminMenuControllerTest extends AppWebTestCase
         $this->assertNotContains('To delete', $crawler->text());
     }
 
+
+    public function testMealEdit()
+    {
+        $client = self::createAdminClient();
+
+        $category = $this->createCategory($client, 'Test');
+        $meal = $this->createMeal($client, $category, 'Test');
+
+        $crawler = $client->request('GET', '/admin/menu/meal/'.$meal->getId());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->selectButton('Enregistrer')->form(array(
+            'meal[name]' => 'New meal name'
+        ));
+
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect(), $client->getCrawler()->text());
+
+        $crawler = $client->followRedirect();
+        $this->assertContains('Plat "New meal name" mis à jour.', $crawler->text());
+        $crawler = $client->reload();
+        $this->assertContains('New meal name', $crawler->text());
+    }
+
+    public function testMealDelete()
+    {
+        $client = self::createAdminClient();
+
+        $category = $this->createCategory($client, 'Test');
+        $meal = $this->createMeal($client, $category, 'To delete');
+
+        $crawler = $client->request('GET', '/admin/menu/meal/'.$meal->getId().'/delete');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->selectButton('Supprimer')->form();
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect(), $client->getCrawler()->text());
+
+        $crawler = $client->followRedirect();
+        $this->assertContains('Le plat To delete a bien été supprimé.', $crawler->text());
+        $crawler = $client->reload();
+        $this->assertNotContains('To delete', $crawler->text());
+    }
+
     private function createCategory(Client $client, $name, $mealCount = 1)
     {
         $this->deleteCategory($client, $name);
@@ -113,5 +159,7 @@ class AdminMenuControllerTest extends AppWebTestCase
 
         $em->persist($meal);
         $em->flush();
+
+        return $meal;
     }
 }
