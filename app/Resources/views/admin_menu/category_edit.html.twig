@@ -1,0 +1,23 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title 'Édition de la catégorie ' ~ category.name %}
+
+{% set admin_breadcrumb = [
+    {label: 'Gestion du menu', href: path('admin_menu_index') },
+    {label: category.name}
+] %}
+
+{% block content %}
+    <h3>Informations générales</h3>
+    {{ form(form) }}
+    <h3>Plats</h3>
+    <table class="table">
+        {% for meal in category.meals %}
+            <tr>
+                <td><a href="{{ path('admin_menu_meal_edit', {id: meal.id}) }}">{{ meal.name }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h3 class="text-danger">Zone de danger</h3>
+    <p><a href="{{ path('admin_menu_category_delete', {id: category.id}) }}" class="btn btn-danger">Supprimer cette catégorie</a></p>
+{% endblock %}

@@ -47,6 +47,11 @@ class Category
         $this->meals = new ArrayCollection();
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getMeals($activeOnly = true)
     {
         $meals = array();

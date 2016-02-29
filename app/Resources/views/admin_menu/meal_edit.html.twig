@@ -1,0 +1,26 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title 'Édition du plat ' ~ meal.name %}
+
+{% form_theme form _self %}
+
+{% set admin_breadcrumb = [
+    {label: 'Gestion du menu'}
+] %}
+
+{% block content %}
+    {{ form(form, {attr: {novalidate: true}}) }}
+{% endblock %}
+
+{% block price_widget %}
+    <div class="row" style="width:200px;">
+        <div class="col-sm-7">
+            {{ form_widget(form.amount) }}
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.currency) }}
+        </div>
+    </div>
+    {{ form_errors(form.amount) }}
+    {{ form_errors(form.currency) }}
+{% endblock %}
