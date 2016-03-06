@@ -2,6 +2,8 @@
 
 {% block title 'Votre panier' %}
 
+{% import "_menu_macros.html.twig" as menu_macros %}
+
 {% block content %}
     <div class="menu">
         <h2>Votre panier</h2>
@@ -9,13 +11,7 @@
             <div class="meal">
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3">
-                        {% if false %}
-                            <img src="..." alt="...">
-                        {% else %}
-                            <div class="no-photo">
-                                Aucune photo
-                            </div>
-                        {% endif %}
+                        {{ menu_macros.meal_photo(row.meal) }}
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9">
                         <h4 class="pull-right">{{ row.price|format_currency }}</h4>

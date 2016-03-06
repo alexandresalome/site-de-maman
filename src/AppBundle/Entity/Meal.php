@@ -44,7 +44,7 @@ class Meal
      * @Column(type="string", length=10)
      * @Range(min=1, minMessage="Le prix n'est pas correct, maman")
      */
-    private $price;
+    private $price = '0';
 
     /**
      * @Column(type="integer")

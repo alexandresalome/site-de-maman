@@ -13,6 +13,12 @@ services:
         tags:
             - { name: twig.extension, alias: price }
 
+    twig.photo:
+        class: AppBundle\Twig\PhotoExtension
+        arguments: [ '@photo_service' ]
+        tags:
+            - { name: twig.extension, alias: photo }
+
     twig.intl:
         class: Twig_Extensions_Extension_Intl
         tags:
@@ -22,9 +28,19 @@ services:
         class: AppBundle\Service\Planning
         arguments: [ "@doctrine.orm.default_entity_manager" ]
 
+    photo_service:
+        class: AppBundle\Service\PhotoService
+        arguments: [ "%kernel.root_dir%/../web/uploads", "/uploads" ]
+
     form.type.order:
         class: AppBundle\Form\Type\OrderType
         arguments: [ "@planning" ]
+        tags:
+            - { name: form.type }
+
+    form.type.meal:
+        class: AppBundle\Form\Type\MealType
+        arguments: [ "@photo_service" ]
         tags:
             - { name: form.type }
 

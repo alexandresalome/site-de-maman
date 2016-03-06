@@ -2,6 +2,8 @@
 
 {% block title 'Édition du plat ' ~ meal.name %}
 
+{% import "_menu_macros.html.twig" as menu_macros %}
+
 {% form_theme form _self %}
 
 {% set admin_breadcrumb = [
@@ -17,6 +19,12 @@
             {{ form(form, {attr: {novalidate: true}}) }}
         </div>
         <div class="col-lg-6">
+            <h3>Photo actuelle</h3>
+            <hr />
+            <div style="width: 300px">
+                {{ menu_macros.meal_photo(meal) }}
+            </div>
+            <hr />
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     Zone de danger

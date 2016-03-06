@@ -56,6 +56,35 @@ class AdminMenuController extends Controller
     }
 
     /**
+     * @Route(path="/admin/menu/create-category", name="admin_menu_category_create")
+     * @ParamConverter
+     */
+    public function categoryCreateAction(Request $request)
+    {
+        $form = $this->createForm(CategoryType::class);
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $category = $form->getData();
+
+            $em->persist($category);
+            $em->flush();
+
+            $this->addFlash('success', sprintf(
+                'Catégorie "%s" créée.',
+                $category->getName()
+            ));
+
+            return $this->redirectToRoute('admin_menu_index');
+        }
+
+        return $this->render('admin_menu/category_create.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
      * @Route(path="/admin/menu/category/{id}/delete", name="admin_menu_category_delete")
      * @ParamConverter
      */
@@ -98,6 +127,37 @@ class AdminMenuController extends Controller
         return $this->render('admin_menu/meal_edit.html.twig', array(
             'meal' => $meal,
             'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route(path="/admin/menu/create-meal/{id}", name="admin_menu_meal_create")
+     * @ParamConverter
+     */
+    public function mealCreateAction(Request $request, Category $category)
+    {
+        $form = $this->createForm(MealType::class);
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $meal = $form->getData();
+
+            $meal->setCategory($category);
+
+            $em->persist($meal);
+            $em->flush();
+
+            $this->addFlash('success', sprintf(
+                'Plat "%s" créé.',
+                $meal->getName()
+            ));
+
+            return $this->redirectToRoute('admin_menu_meal_edit', array('id' => $meal->getId()));
+        }
+
+        return $this->render('admin_menu/meal_create.html.twig', array(
+            'form' => $form->createView(),
+            'category' => $category
         ));
     }
 

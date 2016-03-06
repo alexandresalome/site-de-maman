@@ -45,6 +45,30 @@ class AdminMenuControllerTest extends AppWebTestCase
         $this->assertContains('Test edited', $crawler->text());
     }
 
+    public function testCategoryCreate()
+    {
+        $client = self::createAdminClient();
+
+        $category = $this->deleteCategory($client, 'Test created');
+
+        $crawler = $client->request('GET', '/admin/menu/create-category');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->selectButton('Enregistrer')->form(array(
+            'category[name]' => 'Test created',
+            'category[position]' => '42'
+        ));
+
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect(), $client->getCrawler()->text());
+
+        $crawler = $client->followRedirect();
+        $this->assertContains('Catégorie "Test created" créée.', $crawler->text());
+        $crawler = $client->reload();
+        $this->assertContains('Test created', $crawler->text());
+    }
+
     public function testCategoryDelete()
     {
         $client = self::createAdminClient();
@@ -64,7 +88,6 @@ class AdminMenuControllerTest extends AppWebTestCase
         $crawler = $client->reload();
         $this->assertNotContains('To delete', $crawler->text());
     }
-
 
     public function testMealEdit()
     {
@@ -88,6 +111,32 @@ class AdminMenuControllerTest extends AppWebTestCase
         $this->assertContains('Plat "New meal name" mis à jour.', $crawler->text());
         $crawler = $client->reload();
         $this->assertContains('New meal name', $crawler->text());
+    }
+
+    public function testMealCreate()
+    {
+        $client = self::createAdminClient();
+
+        $category = $this->createCategory($client, 'Test');
+
+        $crawler = $client->request('GET', '/admin/menu/create-meal/'.$category->getId());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->selectButton('Enregistrer')->form(array(
+            'meal[name]' => 'Meal created',
+            'meal[position]' => 1,
+            'meal[price][amount]' => '2.00',
+            'meal[active]' => '1'
+        ));
+
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect(), $client->getCrawler()->text());
+
+        $crawler = $client->followRedirect();
+        $this->assertContains('Plat "Meal created" créé.', $crawler->text());
+        $crawler = $client->reload();
+        $this->assertContains('Meal created', $crawler->text());
     }
 
     public function testMealDelete()
