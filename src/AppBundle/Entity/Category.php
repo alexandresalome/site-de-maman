@@ -47,6 +47,11 @@ class Category
         $this->meals = new ArrayCollection();
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getMeals($activeOnly = true)
     {
         $meals = array();
@@ -56,6 +61,10 @@ class Category
                 $meals[] = $meal;
             }
         }
+
+        usort($meals, function ($left, $right) {
+            return $left->getPosition() > $right->getPosition();
+        });
 
         return $meals;
     }

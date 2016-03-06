@@ -7,6 +7,7 @@ namespace AppBundle\Price;
  */
 class Price
 {
+    const AMOUNT_FORMAT = '/^\d+(\.\d+)?$/';
     /**
      * @var string
      */
@@ -19,6 +20,12 @@ class Price
 
     public function __construct($amount, $currency = 'EUR')
     {
+        if (!is_string($amount) && !preg_match(self::AMOUNT_FORMAT, $amount)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Malformed amount: "%s".',
+                $amount
+            ));
+        }
         $this->amount = $amount;
         $this->currency = $currency;
     }

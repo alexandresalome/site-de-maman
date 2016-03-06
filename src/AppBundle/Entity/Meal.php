@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 
 /**
  * @Entity(repositoryClass="MealRepository")
@@ -23,12 +25,13 @@ class Meal
 
     /**
      * @ManyToOne(targetEntity="Category", inversedBy="meals")
-     * @JoinColumn(nullable=false)
+     * @JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
 
     /**
      * @Column(type="string", length=128)
+     * @NotBlank
      */
     private $name;
 
@@ -39,8 +42,9 @@ class Meal
 
     /**
      * @Column(type="string", length=10)
+     * @Range(min=1, minMessage="Le prix n'est pas correct, maman")
      */
-    private $price;
+    private $price = '0';
 
     /**
      * @Column(type="integer")

@@ -19,6 +19,14 @@
         {% else %}
             <script src="{{ asset('assets/js/all.min.js') }}"></script>
         {% endif %}
+
+        <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div id="modal-content" class="modal-content">
+                </div>
+            </div>
+        </div>
+
         {{ include('_analytics.html.twig') }}
     </body>
 </html>

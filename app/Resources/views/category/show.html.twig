@@ -2,6 +2,8 @@
 
 {% block title category.name %}
 
+{% import "_menu_macros.html.twig" as menu_macros %}
+
 {% set header_active = category.slug %}
 
 {% block content %}
@@ -11,13 +13,7 @@
             <div class="meal">
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3">
-                        {% if false %}
-                            <img src="..." alt="...">
-                        {% else %}
-                            <div class="no-photo">
-                                Aucune photo
-                            </div>
-                        {% endif %}
+                        {{ menu_macros.meal_photo(meal) }}
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9">
                         <h4>{{ meal.name }} <small>{{ meal.price|format_currency }}</small></h4>

@@ -1,0 +1,46 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title 'Édition du plat ' ~ meal.name %}
+
+{% import "_menu_macros.html.twig" as menu_macros %}
+
+{% form_theme form _self %}
+
+{% set admin_breadcrumb = [
+    {label: 'Gestion du menu', href: path('admin_menu_index')},
+    {label: meal.category.name, href: path('admin_menu_category_edit', {id: meal.category.id})},
+    {label: meal.name}
+] %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Informations générales</h3>
+            {{ form(form, {attr: {novalidate: true}}) }}
+        </div>
+        <div class="col-lg-6">
+            <h3>Photo actuelle</h3>
+            <hr />
+            <div style="width: 300px">
+                {{ menu_macros.meal_photo(meal) }}
+            </div>
+            <hr />
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    Zone de danger
+                </div>
+                <div class="panel-body">
+                    <p><a href="{{ path('admin_menu_meal_delete', {id: meal.id}) }}" class="btn btn-danger">Supprimer ce plat</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block price_widget %}
+    <div class="input-group">
+        {{ form_widget(form.amount) }}
+        <span class="input-group-addon">€</span>
+    </div>
+    {{ form_errors(form.amount) }}
+{% endblock %}

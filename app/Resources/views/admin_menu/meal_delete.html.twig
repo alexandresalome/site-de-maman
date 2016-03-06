@@ -1,0 +1,22 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title 'Suppression de la catégorie ' ~ meal.category.name %}
+
+{% set admin_breadcrumb = [
+    {label: 'Gestion du menu', href: path('admin_menu_index') },
+    {label: meal.category.name, href: path('admin_menu_category_edit', {id: meal.category.id})},
+    {label: meal.name, href: path('admin_menu_meal_edit', {id: meal.id})},
+    {label: 'Suppression'}
+] %}
+
+{% block content %}
+    <p>Vous êtes sur le point de supprimer le plat <em>{{ meal.name }}</em>.</p>
+    <form action="{{ path('admin_menu_meal_delete', {id: meal.id}) }}" method="POST">
+        <button class="btn btn-danger">
+            <span class="glyphicon glyphicon-fire"></span>
+            Supprimer
+        </button>
+        ou
+        <a href="{{ path('admin_menu_meal_edit', {id: meal.id}) }}">Revenir au plat</a>
+    </form>
+{% endblock %}
