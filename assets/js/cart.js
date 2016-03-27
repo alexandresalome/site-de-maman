@@ -78,7 +78,7 @@ $(document).on('click', '.btn-add-to-cart button', function (evt) {
                 success: function (resp) {
                     $cartPanel = $("#cart-panel");
                     $cartPanel.fadeOut(function () {
-                        $cartPanel.html(resp).fadeIn();
+                        $cartPanel.replaceWith(resp).fadeIn();
                     });
                     $btn.find('.wait').fadeOut(function () {
                         $btn.find('.ok').fadeIn();
