@@ -15,7 +15,11 @@
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9">
                         <h4 class="pull-right">{{ row.price|format_currency }}</h4>
-                        <h4>{{ row.quantity }}x {{ row.meal.name }} <small>{{ row.meal.price|format_currency }}/unité</small></h4>
+                        <h4>
+                            {{ row.quantity }}x {{ row.meal.name }}
+                            {{ menu_macros.meal_flags(row.meal) }}
+                            <small>{{ row.meal.price|format_currency }}/unité</small>
+                        </h4>
                         <p>{{ row.meal.description }}</p>
                         <div class="input-group btn-edit-cart">
                             <input data-url="{{ path('cart_setMeal') }}" data-meal="{{ row.meal.id }}" type="number" class="form-control" aria-label="Quantité" value="{{ row.quantity }}" name="quantity" />
