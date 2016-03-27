@@ -1,16 +1,16 @@
 <div class="edp-header">
     <div class="container">
-        <a class="brand" href="{{ path('homepage') }}">{{ sitename }}</a>
+        <a class="brand" href="{{ path('homepage') }}"><span>{{ sitename }}</span></a>
     </div>
 </div>
 
 <div class="nav-categories-wrapper">
     <div class="container">
-        {{ render(controller('AppBundle:Cart:panel')) }}
         <ul class="nav nav-categories">
             {% for category in categories %}
-                <li{% if category.slug == active|default %} class="active"{% endif %}><a href="{{ path('category_show', {slug: category.slug}) }}">{{ category.name }}</a></li>
+                <li class="category{% if category.slug == active|default %} active{% endif %}"><a href="{{ path('category_show', {slug: category.slug}) }}">{{ category.name }}</a></li>
             {% endfor %}
+            {{ render(controller('AppBundle:Cart:panel')) }}
         </ul>
     </div>
 </div>
