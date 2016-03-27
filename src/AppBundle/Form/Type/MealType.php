@@ -47,6 +47,9 @@ class MealType extends AbstractType
             ->add('active', CheckboxType::class, array(
                 'label' => 'Afficher ce plat',
             ))
+            ->add('portuguese', CheckboxType::class, array(
+                'label' => 'Drapeau portugais',
+            ))
             ->add('photo', FileType::class, array(
                 'label' => 'Photo',
                 'mapped' => false,

@@ -56,6 +56,11 @@ class Meal
      */
     private $active = true;
 
+    /**
+     * @Column(type="boolean")
+     */
+    private $portuguese = false;
+
     public function __construct()
     {
         $this->id = Uuid::generateV4();
@@ -134,6 +139,18 @@ class Meal
     public function setActive($active = true)
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function isPortuguese()
+    {
+        return $this->portuguese;
+    }
+
+    public function setPortuguese($portuguese = true)
+    {
+        $this->portuguese = $portuguese;
 
         return $this;
     }

@@ -16,7 +16,11 @@
                         {{ menu_macros.meal_photo(meal) }}
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9">
-                        <h4>{{ meal.name }} <small>{{ meal.price|format_currency }}</small></h4>
+                        <h4>
+                            {{ meal.name }}
+                            {{ menu_macros.meal_flags(meal) }}
+                            <small>{{ meal.price|format_currency }}</small>
+                        </h4>
                         <p>{{ meal.description }}</p>
                         <div class="add-to-cart">
                             <div class="input-group btn-add-to-cart">

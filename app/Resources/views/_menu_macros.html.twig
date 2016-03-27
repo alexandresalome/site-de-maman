@@ -11,3 +11,7 @@
         </div>
     {% endif %}
 {% endmacro %}
+
+{% macro meal_flags(meal) %}
+    {% if meal.portuguese %}<img src="{{ asset('images/flag-portugal.png') }}" width="24" height="16" /> {% endif %}
+{% endmacro %}
