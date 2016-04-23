@@ -32,6 +32,11 @@ class Category
     private $name;
 
     /**
+     * @Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @Column(type="string", length=128, unique=true)
      */
     private $slug;
@@ -83,6 +88,18 @@ class Category
     {
         $this->name = $name;
         $this->slug = Transliterator::urlize($name);
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }

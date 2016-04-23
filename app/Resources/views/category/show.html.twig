@@ -9,6 +9,9 @@
 {% block content %}
     <div class="menu">
         <h2>{{ category.name }}</h2>
+        {% if category.description %}
+            <p>{{ category.description|nl2br }}</p>
+        {% endif %}
         {% for meal in category.meals %}
             <div class="meal">
                 <div class="row">
@@ -40,7 +43,9 @@
                 </div>
             </div>
         {% else %}
+            {% if not category.description %}
             <p><em>Cette catégorie est vide. Revenez prochainement, vous trouverez peut-être des nouveaux plats !</em></p>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
