@@ -45,10 +45,14 @@ class CartControllerTest extends AppWebTestCase
         $this->assertTrue($client->getResponse()->isRedirect(), $client->getCrawler()->text());
 
         $collector = $client->getProfile()->getCollector('swiftmailer');
-        $this->assertEquals(1, $collector->getMessageCount());
+        $this->assertEquals(2, $collector->getMessageCount());
         $message = $collector->getMessages()[0];
         $this->assertEquals(array('owner@example.org' => "Owner"), $message->getTo());
-        $this->assertContains('!!!', $message->getSubject());
+        $this->assertContains('Notification de commande', $message->getSubject());
+
+        $message = $collector->getMessages()[1];
+        $this->assertEquals(array('alice@example.org' => "Alice Bob"), $message->getTo());
+        $this->assertContains('Réception de votre commande', $message->getSubject());
 
         $crawler = $client->followRedirect();
 
