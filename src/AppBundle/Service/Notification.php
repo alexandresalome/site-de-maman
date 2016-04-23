@@ -23,9 +23,17 @@ class Notification implements EventSubscriberInterface
     {
         $order = $event->getOrder();
 
+        // notification for owner
         $this->sendMail(
             $this->ownerRecipient,
             '_mail/owner_notification.html.twig',
+            array('order' => $order)
+        );
+
+        // notification for customer
+        $this->sendMail(
+            array($order->getEmail() => $order->getFullname()),
+            '_mail/customer_notification.html.twig',
             array('order' => $order)
         );
     }
@@ -50,6 +58,8 @@ class Notification implements EventSubscriberInterface
     public function getMessage($template, $parameters = array())
     {
         $template = $this->twig->loadTemplate($template);
+
+        $parameters = array_merge($this->twig->getGlobals(), $parameters);
 
         $subject  = $template->renderBlock('subject',   $parameters);
         $bodyHtml = $template->renderBlock('body_html', $parameters);

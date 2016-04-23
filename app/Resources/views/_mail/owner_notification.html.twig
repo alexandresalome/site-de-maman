@@ -1,9 +1,19 @@
-{% block subject 'Maman, t\'as une commande !!!' %}
+{% block subject 'Notification de commande ' ~ sitename %}
 
 {% block body_html %}
-    <p><strong>Nom et prénom</strong> : {{ order.fullname }}</p>
+    <p>Une nouvelle commande a été faite sur le site <strong>{{ sitename }}</strong>.</p>
+
+    {{ include('_mail/_order.html.twig') }}
 {% endblock %}
 
 {% block body_text %}
-Nom et prénom : {{ order.fullname }}
+Bonjour {{ order.fullname }},
+
+Une nouvelle commande a été faite sur le site {{ sitename }}.
+
+{{ include('_mail/_order.text.twig') }}
+
+---
+
+Rosa - 03.21.22.18.15
 {% endblock %}
