@@ -71,5 +71,4 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    sender_address: "%mailer_sender%"
     spool:     { type: memory }

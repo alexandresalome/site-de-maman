@@ -12,11 +12,12 @@ class Notification implements EventSubscriberInterface
     private $mailer;
     private $ownerRecipient;
 
-    public function __construct(\Twig_Environment $twig, \Swift_Mailer $mailer, $ownerRecipient)
+    public function __construct(\Twig_Environment $twig, \Swift_Mailer $mailer, $ownerRecipient, $sender)
     {
         $this->twig = $twig;
         $this->mailer = $mailer;
         $this->ownerRecipient = $ownerRecipient;
+        $this->sender = $sender;
     }
 
     public function onOrderCreatedEvent(OrderEvent $event)
@@ -51,6 +52,7 @@ class Notification implements EventSubscriberInterface
     private function sendMail($recipient, $template, array $parameters = array())
     {
         $message = $this->getMessage($template, $parameters);
+        $message->setFrom($this->sender);
         $message->setTo($recipient);
         $this->mailer->send($message);
     }

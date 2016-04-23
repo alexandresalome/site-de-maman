@@ -46,6 +46,6 @@ services:
 
     notification:
         class: AppBundle\Service\Notification
-        arguments: [ "@twig", "@mailer", "%owner_recipient%" ]
+        arguments: [ "@twig", "@mailer", "%owner_recipient%", "%mailer_sender%" ]
         tags:
             - { name: kernel.event_subscriber }
