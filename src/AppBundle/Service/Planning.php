@@ -9,7 +9,8 @@ class Planning
 {
     private $manager;
     private $workDayHours = array('18:30', '19:00', '19:30', '20:00', '20:30');
-    private $weekEndHours = array('10:00', '10:30', '11:00', '11:30', '12:00', '17:00', '17:30', '18:00', '18:30', '19:00');
+    private $saturdayHours = array('10:00', '10:30', '11:00', '11:30', '12:00', '17:00', '17:30', '18:00', '18:30', '19:00');
+    private $sundayHours = array('10:00', '10:30', '11:00', '11:30', '12:00');
 
     public function __construct(ObjectManager $manager)
     {
@@ -34,8 +35,10 @@ class Planning
             $day = $current->format('N');
             $date = $formatter->format($current);
 
-            if ($day == 6 || $day == 7) {
-                $hours = $this->weekEndHours;
+            if ($day == 6) {
+                $hours = $this->saturdayHours;
+            } elseif ($day == 7) {
+                $hours = $this->sundayHours;
             } else {
                 $hours = $this->workDayHours;
             }
