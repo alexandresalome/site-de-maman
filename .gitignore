@@ -2,6 +2,7 @@
 /bin/*
 !/bin/console
 !/bin/reset
+!/bin/package
 /node_modules
 /phpunit.xml
 /var/*
@@ -19,3 +20,4 @@
 /web/assets/
 /web/bundles/
 /web/uploads/
+/package.tgz
