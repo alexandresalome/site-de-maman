@@ -97,4 +97,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['js', 'css', 'fonts']);
-gulp.task('min', ['jsMin', 'cssMin'], 'fonts');
+gulp.task('min', ['jsMin', 'cssMin', 'fonts']);
