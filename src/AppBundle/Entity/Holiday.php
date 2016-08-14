@@ -6,6 +6,8 @@ use AppBundle\Util\Uuid;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @Entity
@@ -31,6 +33,22 @@ class Holiday
     public function __construct()
     {
         $this->id = Uuid::generateV4();
+        $this->beginAt = new \DateTime('next saturday');
+        $this->endAt = new \DateTime('next sunday');
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function match(\DateTime $day)
+    {
+        $day = $day->setTime(12, 0, 0);
+        $begin = $this->beginAt;
+        $end = $this->endAt->setTime(23, 59, 59);
+
+        return $day >= $begin && $day <= $end;
     }
 
     public function getBeginAt()
@@ -55,5 +73,15 @@ class Holiday
         $this->endAt = $endAt;
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function assertDateInterval(ExecutionContextInterface $context)
+    {
+        if ($this->beginAt > $this->endAt) {
+            $context->addViolation('La date de début et la date de fin ne sont pas dans le bon ordre');
+        }
     }
 }

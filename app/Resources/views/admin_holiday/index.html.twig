@@ -1,0 +1,55 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title 'Nouvelle catégorie' %}
+
+{% set admin_breadcrumb = [
+    {label: 'Vacances'},
+] %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Liste des vacances</h3>
+            {{ form_start(form_holiday, {'action': path('admin_holiday_create')}) }}
+            {{ form_errors(form_holiday) }}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th width="10%">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for holiday in holidays %}
+                    <tr>
+                        <td>{{ holiday.beginAt|date('d/m/Y') }}</td>
+                        <td>{{ holiday.endAt|date('d/m/Y') }}</td>
+                        <td><a href="{{ path('admin_holiday_delete', {id: holiday.id}) }}" class="btn btn-sm btn-danger">Supprimer</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="info"><em>Aucune vacance enregistrée.</em></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>{{ form_widget(form_holiday.begin_at) }}</td>
+                        <td>{{ form_widget(form_holiday.end_at) }}</td>
+                        <td>{{ form_widget(form_holiday.submit) }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            {{ form_end(form_holiday) }}
+        </div>
+        <div class="col-md-6">
+            <h3>Prochaines dates de commande</h3>
+            <ul>
+                {% for day, times in available_times %}
+                    <li>{{ day }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

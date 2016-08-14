@@ -26,6 +26,11 @@ services:
 
     planning:
         class: AppBundle\Service\Planning
+        arguments: [ "@holiday_loader" ]
+
+    holiday_loader:
+        public: false
+        class: AppBundle\Service\Loader\DoctrineHolidayLoader
         arguments: [ "@doctrine.orm.default_entity_manager" ]
 
     photo_service:
