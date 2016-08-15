@@ -2,23 +2,20 @@
 
 namespace AppBundle\Service\Dev;
 
+use AppBundle\Service\Twilio as BaseTwilio;
 use Psr\Log\LoggerInterface;
 
-class Twilio extends \Services_Twilio
+class Twilio extends BaseTwilio
 {
     private $logger;
-    public $account;
-    public $messages;
 
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->account = $this;
-        $this->messages = $this;
     }
 
-    public function sendMessage($from, $to, $message)
+    public function notifyOwner($message)
     {
-        $this->logger->info('Message sent to '.$to.' with content: '.$message);
+        $this->logger->info('SMS - Notified owner with content: '.$message);
     }
 }

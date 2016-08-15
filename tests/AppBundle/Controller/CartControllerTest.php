@@ -55,7 +55,7 @@ class CartControllerTest extends AppWebTestCase
         $this->assertContains('Réception de votre commande', $message->getSubject());
 
         $collector = $client->getProfile()->getCollector('logger');
-        $this->assertHasLog('Message sent', $collector->getLogs());
+        $this->assertHasLog('Notified owner', $collector->getLogs());
 
         $crawler = $client->followRedirect();
 
