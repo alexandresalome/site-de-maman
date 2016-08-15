@@ -1,0 +1,4 @@
+services:
+    twilio:
+        class: AppBundle\Service\Dev\Twilio
+        arguments: [ "@logger" ]

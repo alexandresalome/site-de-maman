@@ -51,6 +51,11 @@ services:
 
     notification:
         class: AppBundle\Service\Notification
-        arguments: [ "@twig", "@mailer", "%owner_recipient%", "%mailer_sender%" ]
+        arguments: [ "@twig", "@mailer", "@twilio", "%owner_recipient%", "%mailer_sender%", "%twilio_from%", "%twilio_to%" ]
         tags:
             - { name: kernel.event_subscriber }
+
+    twilio:
+        class: Services_Twilio
+        public: false
+        arguments: [ "%twilio_sid%", "%twilio_token%" ]

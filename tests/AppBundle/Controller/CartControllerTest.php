@@ -54,6 +54,9 @@ class CartControllerTest extends AppWebTestCase
         $this->assertEquals(array('alice@example.org' => "Alice Bob"), $message->getTo());
         $this->assertContains('Réception de votre commande', $message->getSubject());
 
+        $collector = $client->getProfile()->getCollector('logger');
+        $this->assertHasLog('Message sent', $collector->getLogs());
+
         $crawler = $client->followRedirect();
 
         $this->assertContains('Commande du', $crawler->text());
@@ -81,5 +84,16 @@ class CartControllerTest extends AppWebTestCase
         ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    private function assertHasLog($expected, array $logs)
+    {
+        foreach ($logs as $log) {
+            if (false !== strpos($log['message'], $expected)) {
+                return;
+            }
+        }
+
+        throw new \RuntimeException('Message not found in logs.');
     }
 }

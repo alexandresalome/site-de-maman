@@ -10,14 +10,21 @@ class Notification implements EventSubscriberInterface
 {
     private $twig;
     private $mailer;
+    private $twilio;
     private $ownerRecipient;
+    private $sender;
+    private $twilioFrom;
+    private $twilioTo;
 
-    public function __construct(\Twig_Environment $twig, \Swift_Mailer $mailer, $ownerRecipient, $sender)
+    public function __construct(\Twig_Environment $twig, \Swift_Mailer $mailer, \Services_Twilio $twilio, $ownerRecipient, $sender, $twilioFrom, $twilioTo)
     {
         $this->twig = $twig;
         $this->mailer = $mailer;
+        $this->twilio = $twilio;
         $this->ownerRecipient = $ownerRecipient;
         $this->sender = $sender;
+        $this->twilioFrom = $twilioFrom;
+        $this->twilioTo = $twilioTo;
     }
 
     public function onOrderCreatedEvent(OrderEvent $event)
@@ -35,6 +42,12 @@ class Notification implements EventSubscriberInterface
         $this->sendMail(
             array($order->getEmail() => $order->getFullname()),
             '_mail/customer_notification.html.twig',
+            array('order' => $order)
+        );
+
+        // notification for customer
+        $this->sendSms(
+            '_sms/owner_notification.html.twig',
             array('order' => $order)
         );
     }
@@ -55,6 +68,15 @@ class Notification implements EventSubscriberInterface
         $message->setFrom($this->sender);
         $message->setTo($recipient);
         $this->mailer->send($message);
+    }
+
+    private function sendSms($template, array $parameters = array())
+    {
+        $this->twilio->account->messages->sendMessage(
+            $this->twilioFrom,
+            $this->twilioTo,
+            $this->twig->render($template, $parameters)
+        );
     }
 
     public function getMessage($template, $parameters = array())
