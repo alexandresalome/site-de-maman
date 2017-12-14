@@ -25,9 +25,4 @@ class PhotoExtension extends \Twig_Extension
             new \Twig_SimpleFunction('get_meal_photo', array($this, 'getMealPhoto'))
         );
     }
-
-    public function getName()
-    {
-        return 'photo';
-    }
 }

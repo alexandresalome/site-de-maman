@@ -1,4 +1,5 @@
 services:
-    twilio:
-        class: AppBundle\Service\Dev\Twilio
+    sms:
+        class: AppBundle\Service\Dev\Sms
         arguments: [ "@logger" ]
+        tags: { name: "monolog.logger", channel: "sms"}

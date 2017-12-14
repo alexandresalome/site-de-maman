@@ -24,7 +24,6 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
@@ -40,8 +39,8 @@ twig:
     form_themes:
         - 'bootstrap_3_horizontal_layout.html.twig'
     globals:
-        analytics_id: %analytics_id%
-        sitename: %sitename%
+        analytics_id: "%analytics_id%"
+        sitename: "%sitename%"
 
 # Doctrine Configuration
 doctrine:

@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class CartControllerTest extends AppWebTestCase
 {
@@ -86,8 +88,9 @@ class CartControllerTest extends AppWebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    private function assertHasLog($expected, array $logs)
+    private function assertHasLog($expected, Data $logs)
     {
+        $logs = $logs->getValue();
         foreach ($logs as $log) {
             if (false !== strpos($log['message'], $expected)) {
                 return;

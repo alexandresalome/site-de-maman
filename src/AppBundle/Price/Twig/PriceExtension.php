@@ -31,9 +31,4 @@ class PriceExtension extends \Twig_Extension
 
         return $this->numberFormatter->formatCurrency($amount, $currency);
     }
-
-    public function getName()
-    {
-        return 'price';
-    }
 }

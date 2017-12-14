@@ -6,7 +6,7 @@ security:
         in_memory:
             memory:
                 users:
-                    admin: {password: %admin_password%, roles: ['ROLE_ADMIN'] }
+                    admin: {password: "%admin_password%", roles: ['ROLE_ADMIN'] }
 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
@@ -15,14 +15,17 @@ security:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
+            logout_on_user_change: true
             security: false
 
         admin:
             pattern: ^/admin
+            logout_on_user_change: true
             http_basic:
                 realm: "Zone sécurisé"
 
         main:
+            logout_on_user_change: true
             anonymous: ~
             # activate different ways to authenticate
 

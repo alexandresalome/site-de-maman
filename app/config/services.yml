@@ -11,20 +11,21 @@ services:
     twig.currency:
         class: AppBundle\Price\Twig\PriceExtension
         tags:
-            - { name: twig.extension, alias: price }
+            - { name: twig.extension }
 
     twig.photo:
         class: AppBundle\Twig\PhotoExtension
         arguments: [ '@photo_service' ]
         tags:
-            - { name: twig.extension, alias: photo }
+            - { name: twig.extension }
 
     twig.intl:
         class: Twig_Extensions_Extension_Intl
         tags:
-            - { name: twig.extension, alias: intl }
+            - { name: twig.extension }
 
     planning:
+        public: true
         class: AppBundle\Service\Planning
         arguments: [ "@holiday_loader" ]
 
@@ -51,16 +52,11 @@ services:
 
     notification:
         class: AppBundle\Service\Notification
-        arguments: [ "@twig", "@mailer", "@twilio", "%owner_recipient%", "%mailer_sender%" ]
+        arguments: [ "@twig", "@mailer", "@sms", "%owner_recipient%", "%mailer_sender%" ]
         tags:
             - { name: kernel.event_subscriber }
 
-    twilio:
+    sms:
         public: false
-        class: AppBundle\Service\Twilio
-        arguments: [ "@logger", "@twilio.sdk", "%twilio_from%", "%twilio_to%"]
-
-    twilio.sdk:
-        class: Services_Twilio
-        public: false
-        arguments: [ "%twilio_sid%", "%twilio_token%" ]
+        class: AppBundle\Service\Sms
+        arguments: [ "%free_sms_user%", "%free_sms_password%", "@logger" ]
