@@ -11,20 +11,21 @@ services:
     twig.currency:
         class: AppBundle\Price\Twig\PriceExtension
         tags:
-            - { name: twig.extension, alias: price }
+            - { name: twig.extension }
 
     twig.photo:
         class: AppBundle\Twig\PhotoExtension
         arguments: [ '@photo_service' ]
         tags:
-            - { name: twig.extension, alias: photo }
+            - { name: twig.extension }
 
     twig.intl:
         class: Twig_Extensions_Extension_Intl
         tags:
-            - { name: twig.extension, alias: intl }
+            - { name: twig.extension }
 
     planning:
+        public: true
         class: AppBundle\Service\Planning
         arguments: [ "@holiday_loader" ]
 

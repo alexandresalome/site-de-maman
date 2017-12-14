@@ -37,8 +37,9 @@ class AdminMenuController extends Controller
     public function categoryEditAction(Request $request, Category $category)
     {
         $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', sprintf(
@@ -62,8 +63,9 @@ class AdminMenuController extends Controller
     public function categoryCreateAction(Request $request)
     {
         $form = $this->createForm(CategoryType::class);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $category = $form->getData();
@@ -112,8 +114,9 @@ class AdminMenuController extends Controller
     public function mealEditAction(Request $request, Meal $meal)
     {
         $form = $this->createForm(MealType::class, $meal);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', sprintf(
@@ -137,8 +140,9 @@ class AdminMenuController extends Controller
     public function mealCreateAction(Request $request, Category $category)
     {
         $form = $this->createForm(MealType::class);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $meal = $form->getData();
 

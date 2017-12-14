@@ -69,7 +69,9 @@ class CartController extends Controller
             return $this->redirectToRoute('cart_show');
         }
 
-        if ($form->handleRequest($request)->isValid()) {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $order = $form->getData();
             $order->loadFromCart($this->getCart($request));
 

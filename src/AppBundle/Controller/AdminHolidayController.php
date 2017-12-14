@@ -31,8 +31,9 @@ class AdminHolidayController extends Controller
     public function createAction(Request $request)
     {
         $form = $this->createForm(HolidayType::class);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($form->getData());
             $em->flush();

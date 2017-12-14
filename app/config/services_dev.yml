@@ -2,3 +2,4 @@ services:
     sms:
         class: AppBundle\Service\Dev\Sms
         arguments: [ "@logger" ]
+        tags: { name: "monolog.logger", channel: "sms"}
