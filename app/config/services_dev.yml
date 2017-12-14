@@ -1,4 +1,4 @@
 services:
-    twilio:
-        class: AppBundle\Service\Dev\Twilio
+    sms:
+        class: AppBundle\Service\Dev\Sms
         arguments: [ "@logger" ]

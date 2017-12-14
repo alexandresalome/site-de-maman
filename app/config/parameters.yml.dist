@@ -20,7 +20,5 @@ parameters:
     analytics_id: ~
     sitename: "Site de maman"
 
-    twilio_from: "+33678901234"
-    twilio_to: "+33678901234"
-    twilio_sid: "123abc"
-    twilio_token: "[AuthToken]"
+    free_sms_user: ""
+    free_sms_password: ""

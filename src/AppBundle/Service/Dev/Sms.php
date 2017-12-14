@@ -2,10 +2,10 @@
 
 namespace AppBundle\Service\Dev;
 
-use AppBundle\Service\Twilio as BaseTwilio;
+use AppBundle\Service\Sms as BaseSms;
 use Psr\Log\LoggerInterface;
 
-class Twilio extends BaseTwilio
+class Sms extends BaseSms
 {
     private $logger;
 

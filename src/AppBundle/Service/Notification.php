@@ -4,7 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Event\OrderEvent;
 use AppBundle\Event\OrderEvents;
-use AppBundle\Service\Twilio;
+use AppBundle\Service\Sms;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class Notification implements EventSubscriberInterface
@@ -15,7 +15,7 @@ class Notification implements EventSubscriberInterface
     private $ownerRecipient;
     private $sender;
 
-    public function __construct(\Twig_Environment $twig, \Swift_Mailer $mailer, Twilio $twilio, $ownerRecipient, $sender)
+    public function __construct(\Twig_Environment $twig, \Swift_Mailer $mailer, Sms $twilio, $ownerRecipient, $sender)
     {
         $this->twig = $twig;
         $this->mailer = $mailer;
