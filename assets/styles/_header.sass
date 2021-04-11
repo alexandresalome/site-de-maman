@@ -1,7 +1,10 @@
-@import "node_modules/bootstrap/scss/mixins"
+@import "_theme"
+
+$active-border-color: red
 
 .edp--header
-    margin: 1rem 0 .5rem 0
+    padding: 1rem 0
+    background-color: $palette-white
 
     > .container > .row
         display: flex
@@ -28,30 +31,19 @@
             > .col--logo, > .col--title, > .col--extra
                 text-align: center
 
-.navbar-categories > li
+.edp--nav
+    padding: 0
+    margin-bottom: 2rem
 
-    background-color: white
-    border-bottom: 3px solid white
+    ul.navbar-nav
+        > .nav-item
+            &.nav-item-group > .nav-link
+                background: $palette-white
 
-    > a
-        text-decoration: none
-
-    &.active, &:hover
-        background-color: white
-        border-color: red
-
-    &.active > a
-        color: black
-
-    &.active > a, &:hover > a
-        background-color: white
-
-.nav-categories-wrapper
-    background-color: #f8f8f8
-    border-bottom: 1px solid #e8e8e8
-
-.nav-categories
-    > li
-        display: inline-block
-        &.active
-            background-color: #e8e8e8
+            > .nav-link
+                color: $palette-dark
+                text-decoration: none
+                padding: .5rem
+                border-bottom: 3px solid rgba($palette-white, 0)
+                &.active, &:hover
+                    border-bottom: 3px solid $active-border-color
