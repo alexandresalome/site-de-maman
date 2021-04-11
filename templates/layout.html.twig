@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ render(controller('App\\Controller\\DefaultController::headerAction', {active: header_active|default})) }}
+    <div class="container">
+        {% block content '' %}
+    </div>
+    <hr />
+    <p class="text-right"><sup><em>Photos non contractuelles &nbsp;</em></sup></p>
+{% endblock %}

@@ -1,0 +1,27 @@
+## Coordonnées
+
+- Nom et prénom : {{ order.fullname }}
+- Téléphone : {{ order.phone }}
+- E-mail : {{ order.email }}
+
+
+## Commande
+
+Date et heure d'enlèvement : {{ order.date }}
+
+{% for row in order.order.rows %}
+{{ row.quantity }}x {{ row.meal }} (PU: {{ row.unit_price|format_price }}) = {{ row.price|format_price }}
+{% endfor %}
+
+Total : {{ order.order.total_price|format_price }}
+
+
+## Remarques
+
+{% if order.observations %}
+{{ order.observations|nl2br }}
+{% else %}
+Aucune remarque.
+{% endif %}
+
+Votre commande en ligne : {{ url('order_show', {id: order.id}) }}

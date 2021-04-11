@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% set admin_breadcrumb = admin_breadcrumb|default(null) %}
+    <div class="container">
+        <h1 class="admin-title"><a href="{{ path('admin_index') }}">Gestion de {{ sitename }}</a></h1>
+        <ol class="breadcrumb">
+            {% if admin_breadcrumb is null %}
+                <li class="active"><span class="glyphicon glyphicon-home"></span></li>
+            {% else %}
+                <li><a href="{{ path('admin_index') }}"><span class="glyphicon glyphicon-home"></span></a></li>
+                {% for crumb in admin_breadcrumb %}
+                    {% if crumb.href|default(null) %}
+                        <li><a href="{{ crumb.href }}">{{ crumb.label }}</a></li>
+                    {% else %}
+                        <li>{{ crumb.label }}</li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ol>
+        {% for message in app.request.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block content '' %}
+    </div>
+{% endblock %}

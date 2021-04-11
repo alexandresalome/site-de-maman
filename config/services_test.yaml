@@ -1,0 +1,2 @@
+services:
+    App\Service\Sms\SmsInterface: '@App\Service\Sms\InMemorySms'

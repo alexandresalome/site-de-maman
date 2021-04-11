@@ -1,0 +1,11 @@
+<p>Bonjour {{ order.fullname }},</p>
+
+<p>Nous avons bien reçu votre commande sur le site <strong>{{ sitename }}</strong>.</p>
+
+<p>Nous sommes susceptibles de vous contacter afin de confirmer avec vous le détail de la commande.</p>
+
+{{ include('_mail/_order.html.twig') }}
+
+<hr />
+
+<p>Pascal & Rosa - 03.21.22.18.15</p>

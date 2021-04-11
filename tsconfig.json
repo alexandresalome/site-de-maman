@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "target": "es5",
+  },
+  "include": [
+    "node_modules/@symfony/stimulus-bridge-types/index.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

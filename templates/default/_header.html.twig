@@ -1,0 +1,31 @@
+<div class="edp-header">
+    <div class="container">
+        <a class="brand" href="{{ path('homepage') }}"><span>{{ sitename }}</span></a>
+    </div>
+</div>
+
+<div class="nav-categories-wrapper">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Basculer le menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% for category in categories %}
+                        <li class="nav-item">
+                            <a class="nav-link{% if category.slug == active|default %} active{% endif %}" aria-current="page" href="{{ path('category_show', {slug: category.slug}) }}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {{ render(controller('App\\Controller\\CartController::panelAction')) }}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

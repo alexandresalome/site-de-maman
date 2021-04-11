@@ -1,0 +1,29 @@
+<li id="cart-panel"{% if not cart.totalCount == 0 %} class="not-empty"{% endif %}>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="glyphicon glyphicon-shopping-cart"></i>
+        Votre panier ({{ cart.totalCount }})
+        <i class="caret"></i>
+    </a>
+    <div class="dropdown-menu">
+        <div class="cart-panel">
+            {% for row in cart.rows %}
+                {% if loop.first %}
+                    <table>
+                {% endif %}
+                    <tr>
+                        <td class="quantity">{{ row.quantity }}x</td>
+                        <td class="name">{{ row.meal.name }}</td>
+                        <td class="price">{{ row.price|format_price }}</td>
+                    </tr>
+                {% if loop.last %}
+                    <tr class="total"><td colspan="3"><strong>Total</strong> : {{ cart.totalPrice|format_price }}</td></tr>
+                    </table>
+                    <hr />
+                    <p class="show"><a href="{{ path('cart_show') }}" class="btn btn-success">Voir mon panier</a></p>
+                {% endif %}
+            {% else %}
+                <p class="empty"><em>Votre panier est actuellement vide</em></p>
+            {% endfor %}
+        </div>
+    </div>
+</li>

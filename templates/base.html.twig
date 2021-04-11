@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title '???' %} - {{ sitename }}</title>
+        {{ encore_entry_link_tags('app') }}
+    </head>
+    <body>
+        {% block body '' %}
+        {{ encore_entry_script_tags('app') }}
+
+        <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div id="modal-content" class="modal-content">
+                </div>
+            </div>
+        </div>
+
+        {{ include('_analytics.html.twig') }}
+    </body>
+</html>

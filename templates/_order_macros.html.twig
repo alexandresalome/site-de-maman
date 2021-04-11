@@ -1,0 +1,7 @@
+{% macro order_title(order) %}
+    {{ order.fullname }}, le {{ order.createdAt|format_date('full', 'none') }} à {{ order.createdAt|format_date('none', 'short') }}
+{% endmacro %}
+
+{% macro order_creation(order) %}
+    {{ order.createdAt|format_date('full', 'short') }}
+{% endmacro %}

@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block title category.name %}
+
+{% import "_menu_macros.html.twig" as menu_macros %}
+
+{% set header_active = category.slug %}
+
+{% block content %}
+    <div class="menu">
+        <h2>{{ category.name }}</h2>
+        {% if category.description %}
+            <p>{{ category.description|nl2br }}</p>
+        {% endif %}
+        {% for meal in category.meals %}
+            <div class="meal">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        {{ menu_macros.meal_photo(meal) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-9">
+                        <h4>
+                            {{ meal.name }}
+                            {{ menu_macros.meal_flags(meal) }}
+                            <small>{{ meal.price|format_price }}</small>
+                        </h4>
+                        <p>{{ meal.description }}</p>
+                        <div class="add-to-cart">
+                            <div class="input-group btn-add-to-cart">
+                                <input data-url="{{ path('cart_setMeal') }}" data-mode="add" data-meal="{{ meal.id }}" type="number" class="form-control" aria-label="Quantité" value="1" name="quantity" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-success">
+                                        <i class="add glyphicon glyphicon-shopping-cart"></i>
+                                        <i style="display: none;" class="wait glyphicon glyphicon-hourglass"></i>
+                                        <i style="display: none;" class="ko glyphicon glyphicon-alert"></i>
+                                        <i style="display: none;" class="ok glyphicon glyphicon-ok"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="display: none;" class="alert alert-success"><p>Le plat a bien été ajouté au panier !</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            {% if not category.description %}
+            <p><em>Cette catégorie est vide. Revenez prochainement, vous trouverez peut-être des nouveaux plats !</em></p>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

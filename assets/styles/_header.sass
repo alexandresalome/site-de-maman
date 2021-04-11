@@ -1,0 +1,50 @@
+$imageWidth: 200px
+$imageHeight: 164px
+$imageSrc: "../images/logo.png"
+
+.edp-header
+    > .container
+        padding: 0 0 20px 0
+
+        > a.brand
+            margin: 0 auto
+            display: block
+            width: $imageWidth
+            height: $imageHeight
+            background-image: url($imageSrc)
+
+            > span
+                display: none
+
+.nav-categories-wrapper
+    background-color: white
+    border: 0
+    text-align: center
+
+.nav-categories > li.category
+
+    background-color: white
+    border-bottom: 3px solid white
+
+    > a
+        color: #777
+
+    &.active, &:hover
+        background-color: white
+        border-color: red
+
+    &.active > a
+        color: black
+
+    &.active > a, &:hover > a
+        background-color: white
+
+.nav-categories-wrapper
+    background-color: #f8f8f8
+    border-bottom: 1px solid #e8e8e8
+
+.nav-categories
+    > li
+        display: inline-block
+        &.active
+            background-color: #e8e8e8
