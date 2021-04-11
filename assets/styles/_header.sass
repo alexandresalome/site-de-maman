@@ -1,33 +1,40 @@
-$imageWidth: 200px
-$imageHeight: 164px
-$imageSrc: "../images/logo.png"
+@import "node_modules/bootstrap/scss/mixins"
 
-.edp-header
-    > .container
-        padding: 0 0 20px 0
+.edp--header
+    margin: 1rem 0 .5rem 0
 
-        > a.brand
-            margin: 0 auto
-            display: block
-            width: $imageWidth
-            height: $imageHeight
-            background-image: url($imageSrc)
+    > .container > .row
+        display: flex
+        align-items: center
 
-            > span
-                display: none
+        > .col--logo
+            > a
+                display: block
+                > img
+                    max-width: 200px
+                    max-height: 139px
 
-.nav-categories-wrapper
-    background-color: white
-    border: 0
-    text-align: center
+        > .col--title
+            text-align: center
+            > h1 > a
+                text-decoration: none
+            > h1 > div
+                font-size: 1.5rem
 
-.nav-categories > li.category
+        > .col--extra
+            text-align: right
+
+        @include media-breakpoint-down(sm)
+            > .col--logo, > .col--title, > .col--extra
+                text-align: center
+
+.navbar-categories > li
 
     background-color: white
     border-bottom: 3px solid white
 
     > a
-        color: #777
+        text-decoration: none
 
     &.active, &:hover
         background-color: white
