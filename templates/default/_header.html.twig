@@ -9,7 +9,7 @@
             <div class="col-lg-8 col-md-6 col-sm-8 col--title">
                 <h1>
                     <a href="{{ path('homepage') }}">
-                        Envie d'un Plat
+                        {{ sitename }}
                     </a>
                     <div>
                         Pascal &amp; Rosa
@@ -24,27 +24,35 @@
     </div>
 </header>
 
-<nav class="edp--nav navbar navbar-expand-lg navbar-light bg-light">
+{% if header_category_group is defined %}
+<nav class="edp--nav navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Basculer le menu">
+        <ul class="navbar-nav navbar-group me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if header_category_group == 'fr' %}
+                        Cuisine française
+                    {% elseif header_category_group == 'pt' %}
+                        Cuisine portugaise
+                    {% elseif header_category_group == 'portage' %}
+                        Portage de repas
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" title="Cuisine française" href="{{ path('category_show', {group: 'fr', slug: get_categories('fr')[0].slug}) }}">Cuisine française</a></li>
+                    <li><a class="dropdown-item" title="Cuisine portugaise" href="{{ path('category_show', {group: 'pt', slug: get_categories('pt')[0].slug}) }}">Cuisine portugaise</a></li>
+                    <li><a class="dropdown-item" title="Portage de repas" href="#">Portage de repas</a></li>
+                </ul>
+            </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav navbar-categories me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown nav-item-group">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Cuisine Française
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                {% for category in categories %}
+                {% for category in get_categories(header_category_group) %}
                 <li class="nav-item{% if category.slug == active|default %} active{% endif %}">
-                    <a class="nav-link{% if category.slug == active|default %} active{% endif %}" aria-current="page" href="{{ path('category_show', {slug: category.slug}) }}">
+                    <a class="nav-link{% if category.slug == active|default %} active{% endif %}" aria-current="page" href="{{ path('category_show', {slug: category.slug, group: header_category_group}) }}">
                         {{ category.name }}
                     </a>
                 </li>
@@ -56,3 +64,4 @@
         </ul>
     </div>
 </nav>
+{% endif %}

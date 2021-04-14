@@ -1,11 +1,45 @@
 @import "_theme"
 @import "node_modules/bootstrap/scss/bootstrap-reboot"
 @import "node_modules/bootstrap/scss/bootstrap-grid"
+@import "node_modules/bootstrap/scss/breadcrumb"
 @import "node_modules/bootstrap/scss/type"
+@import "node_modules/bootstrap/scss/tables"
 @import "node_modules/bootstrap/scss/buttons"
+@import "node_modules/bootstrap/scss/forms"
+@import "node_modules/bootstrap/scss/helpers"
 @import "node_modules/bootstrap/scss/dropdown"
 @import "node_modules/bootstrap/scss/navbar"
 @import "node_modules/bootstrap/scss/card"
 
 @import "_admin"
 @import "_header"
+
+.edp--content
+    margin-top: $padding-bottom-navigation
+
+
+.edp--flag-pt
+    background: url('../images/pt.svg') no-repeat
+
+.edp--flag-fr
+    background: url('../images/fr.svg') no-repeat
+
+.edp--flag-pt, .edp--flag-fr, .edp--portage
+    background-size: contain
+    background-position: center
+    > div
+        padding: 1rem
+        background: linear-gradient(135deg, rgba($palette-light,.95) 30%, rgba($palette-light,.8) 70%, rgba($palette-light,.95) 90%)
+
+    h3
+        padding: .5rem 0
+        font-weight: bold
+        text-align: center
+
+    h4
+        text-align: center
+        padding: .2rem .5rem
+        > a
+            text-decoration: none
+            &:hover
+                text-decoration: underline

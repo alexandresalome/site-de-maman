@@ -1,23 +1,45 @@
 {% extends 'layout.html.twig' %}
 
-{% block title 'Vente de plats franco-portugais dans le Pas-de-Calais' %}
+{% block title 'Portage de repas, cuisine française et portugaise' %}
 
 {% block content %}
-    <h2>Choisissez, commandez, emportez !</h2>
-    <p>Si vous êtes <strong>dans le Pas-de-Calais</strong> ou pas très loin, et qu'un soir vous n'avez pas envie de faire à manger, alors <a href="#">consultez notre menu</a> et commandez un petit plat !</p>
     <div class="row">
         <div class="col-md-4">
-            <h3>Des plats français et portugais</h3>
-            <p>Il y a bien sûr les traditionnels plats portugais comme ceux à la morue. Mais connaissez-vous les desserts portugais, comme les Pastéis de Nata ?</p>
+            <div class="edp--flag-fr">
+                <div>
+                    <h3>Plats français</h3>
+                    {% for category in get_categories('fr') %}
+                        <h4>
+                            <a href="{{ path('category_show', {group: 'fr', slug: category.slug}) }}">
+                                {{ category.name }}
+                            </a>
+                        </h4>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
-            <h3>Des plats fait maison</h3>
-            <p>Préparés à partir de produits frais et à la demande uniquement, soyez assuré de la fraîcheur et de la qualité des plats vendus.</p>
-            <p>L'essayer, c'est l'adopter !</p>
+            <div class="edp--portage">
+                <h3>Portage de repas</h3>
+                <p>Nous proposons la livraison à domicile de plats, que c'est de la bonne nourriture qui nourrit bien.</p>
+                <p>Allez voir là donc :</p>
+                <p>XXX</p>
+            </div>
         </div>
         <div class="col-md-4">
-            <h3>A emporter, à Liencourt</h3>
-            <p>Malheureusement, ces délicieux petits plats ne sont disponibles que à emporter et 48h à l'avance !</p>
+            <div class="edp--flag-pt">
+                <div>
+                    <h3>Plats portugais</h3>
+                    {% for category in get_categories('pt') %}
+                        <h4>
+                            <a href="{{ path('category_show', {group: 'pt', slug: category.slug}) }}">
+                                {{ category.name }}
+                            </a>
+                        </h4>
+
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

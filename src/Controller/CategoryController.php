@@ -11,11 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/menu/{slug}", name="category_show")
-     * @ParamConverter("slug")
+     * @Route("/menu/{group}/{slug}", name="category_show")
      */
-    public function __invoke(Category $category): Response
+    public function __invoke(string $group, string $slug): Response
     {
+        try {
+            $category = $this->getDoctrine()->getRepository(Category::class)->findOneByGroupAndSlug($group, $slug);
+        } catch (\InvalidArgumentException $e) {
+            throw $this->createNotFoundException($e->getMessage(), $e);
+        }
         return $this->render('category/show.html.twig', array(
             'category' => $category
         ));

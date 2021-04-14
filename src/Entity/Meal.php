@@ -21,45 +21,45 @@ class Meal
      * @Id
      * @Column(type="string", length=40)
      */
-    private $id;
+    private string $id;
 
     /**
      * @ManyToOne(targetEntity="Category", inversedBy="meals")
      * @JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $category;
+    private ?Category $category = null;
 
     /**
      * @Column(type="string", length=128)
      * @NotBlank
      */
-    private $name;
+    private ?string $name = null;
 
     /**
      * @Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description = null;
 
     /**
      * @Column(type="string", length=10)
      * @Range(min=1, minMessage="Le prix n'est pas correct, maman")
      */
-    private $price = '0';
+    private string $price = '0';
 
     /**
      * @Column(type="integer")
      */
-    private $position = 1;
+    private int $position = 1;
 
     /**
      * @Column(type="boolean")
      */
-    private $active = true;
+    private bool $active = true;
 
     /**
      * @Column(type="boolean")
      */
-    private $portuguese = false;
+    private bool $portuguese = false;
 
     public function __construct()
     {

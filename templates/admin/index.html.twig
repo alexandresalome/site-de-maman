@@ -34,7 +34,8 @@
         </div>
         <div class="col-sm-6">
             <h3>Le menu</h3>
-            <p>Actuellement <strong>{{ category_count }}</strong> catégories pour <strong>{{ meal_count }} plats</strong>.</p>
+            <p>Cuisine française : <strong>{{ category_count_fr }}</strong> catégories pour <strong>{{ meal_count_fr }} plats</strong>.</p>
+            <p>Cuisine portugaise : <strong>{{ category_count_pt }}</strong> catégories pour <strong>{{ meal_count_pt }} plats</strong>.</p>
             <p><a class="btn btn-primary" href="{{ path('admin_menu_index') }}">Gérer le menu</a></p>
             <h3>Les vacances</h3>
             <p>La prochaine commande possible est le <strong>{{ first_available_time }}</strong>.</p>

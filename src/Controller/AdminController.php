@@ -25,15 +25,19 @@ class AdminController extends AbstractController
     public function __invoke(): Response
     {
         $orders = $this->getDoctrine()->getRepository(Order::class)->findLatest(5);
-        $categoryCount = $this->getDoctrine()->getRepository(Category::class)->countAll();
-        $mealCount = $this->getDoctrine()->getRepository(Meal::class)->countAll();
+        $categoryCountFr = $this->getDoctrine()->getRepository(Category::class)->countAll('fr');
+        $categoryCountPt = $this->getDoctrine()->getRepository(Category::class)->countAll('pt');
+        $mealCountFr = $this->getDoctrine()->getRepository(Meal::class)->countAll('fr');
+        $mealCountPt = $this->getDoctrine()->getRepository(Meal::class)->countAll('pt');
 
         $firstAvailableTime = $this->get(Planning::class)->getFirstAvailableTime();
 
         return $this->render('admin/index.html.twig', array(
             'orders' => $orders,
-            'category_count' => $categoryCount,
-            'meal_count' => $mealCount,
+            'category_count_fr' => $categoryCountFr,
+            'category_count_pt' => $categoryCountPt,
+            'meal_count_fr' => $mealCountFr,
+            'meal_count_pt' => $mealCountPt,
             'first_available_time' => $firstAvailableTime,
         ));
     }

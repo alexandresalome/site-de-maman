@@ -5,46 +5,50 @@ namespace App\Entity;
 use App\Util\Uuid;
 use Behat\Transliterator\Transliterator;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @Entity(repositoryClass="CategoryRepository")
+ * @ORM\Entity(repositoryClass="CategoryRepository")
+ * @ORM\Table(indexes={@ORM\Index(columns={"group_name", "slug"})})
  */
 class Category
 {
     /**
-     * @Id
-     * @Column(type="string", length=40)
+     * @ORM\Id
+     * @ORM\Column(type="string", length=40)
      */
-    private $id;
+    private string $id;
 
     /**
-     * @OneToMany(targetEntity="Meal", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Meal", mappedBy="category")
+     * @var Meal[]|ArrayCollection
      */
-    private $meals;
+    private mixed $meals;
 
     /**
-     * @Column(type="string", length=128)
+     * @ORM\Column(name="group_name", type="string", length=16)
      */
-    private $name;
+    private ?string $group = null;
 
     /**
-     * @Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=128)
      */
-    private $description;
+    private ?string $name = null;
 
     /**
-     * @Column(type="string", length=128, unique=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $slug;
+    private ?string $description = null;
 
     /**
-     * @Column(type="integer")
+     * @ORM\Column(type="string", length=128)
      */
-    private $position = 1;
+    private ?string $slug = null;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private int $position = 1;
 
     public function __construct()
     {
@@ -52,12 +56,15 @@ class Category
         $this->meals = new ArrayCollection();
     }
 
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getMeals($activeOnly = true)
+    /**
+     * @return Meal[]
+     */
+    public function getMeals($activeOnly = true): array
     {
         $meals = array();
 
@@ -74,17 +81,17 @@ class Category
         return $meals;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = $name;
         $this->slug = Transliterator::urlize($name);
@@ -92,24 +99,36 @@ class Category
         return $this;
     }
 
-    public function getDescription()
+    public function getGroup(): ?string
+    {
+        return $this->group;
+    }
+
+    public function setGroup(string $group): static
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription($description)
+    public function setDescription(string $description): static
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
 
-    public function setPosition($position)
+    public function setPosition($position): static
     {
         $this->position = $position;
 

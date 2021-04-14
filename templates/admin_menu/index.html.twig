@@ -7,8 +7,22 @@
 ] %}
 
 {% block content %}
-    {% for category in categories %}
-        <h3>#{{ category.position }} : <a href="{{ path('admin_menu_category_edit', {id: category.id}) }}">{{ category.name }}</a></h3>
-    {% endfor %}
-    <p><a href="{{ path('admin_menu_category_create') }}" class="btn btn-success">Créer une catégorie</a></p>
+    <div class="d-flex">
+        <h2 class="flex-grow-1">Gestion du menu</h2>
+        <p><a href="{{ path('admin_menu_category_create') }}" class="btn btn-success">Créer une catégorie</a></p>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Cuisine française</h3>
+            {% for category in categories_fr %}
+                <h3>#{{ category.position }} : <a href="{{ path('admin_menu_category_edit', {id: category.id}) }}">{{ category.name }}</a></h3>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+            <h3>Cuisine portugaise</h3>
+            {% for category in categories_pt %}
+                <h3>#{{ category.position }} : <a href="{{ path('admin_menu_category_edit', {id: category.id}) }}">{{ category.name }}</a></h3>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

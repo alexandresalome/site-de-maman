@@ -1,9 +1,10 @@
 @import "_theme"
 
 $active-border-color: red
+$header-padding: 1rem
 
 .edp--header
-    padding: 1rem 0
+    padding: $header-padding 0
     background-color: $palette-white
 
     > .container > .row
@@ -31,19 +32,29 @@ $active-border-color: red
             > .col--logo, > .col--title, > .col--extra
                 text-align: center
 
+$padding-bottom-navigation: 2rem
+
 .edp--nav
     padding: 0
-    margin-bottom: 2rem
+    background-color: rgba($palette-white, .5)
 
-    ul.navbar-nav
-        > .nav-item
-            &.nav-item-group > .nav-link
-                background: $palette-white
+    > .container
+        display: flex
+        align-items: baseline
 
-            > .nav-link
-                color: $palette-dark
-                text-decoration: none
-                padding: .5rem
-                border-bottom: 3px solid rgba($palette-white, 0)
-                &.active, &:hover
-                    border-bottom: 3px solid $active-border-color
+
+        ul.navbar-nav
+            &.navbar-categories
+                display: flex
+                flex-wrap: wrap
+
+            > .nav-item
+                > .nav-link
+                    display: block
+                    padding: .5rem 1rem
+                    white-space: nowrap
+                    color: $palette-dark
+                    text-decoration: none
+                    border-bottom: 3px solid rgba($palette-white, 0)
+                    &.active, &:hover
+                        border-bottom: 3px solid $active-border-color

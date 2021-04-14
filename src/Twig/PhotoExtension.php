@@ -24,7 +24,7 @@ class PhotoExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('get_meal_photo', array($this, 'getMealPhoto')),
+            new TwigFunction('get_meal_photo', [$this, 'getMealPhoto']),
         ];
     }
 }

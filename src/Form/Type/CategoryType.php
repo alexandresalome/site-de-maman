@@ -4,6 +4,7 @@ namespace App\Form\Type;
 
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,6 +19,13 @@ class CategoryType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'label' => 'Nom',
+            ))
+            ->add('group', ChoiceType::class, array(
+                'label' => 'Groupe',
+                'choices' => [
+                    'Cuisine française' => 'fr',
+                    'Cuisine portugaise' => 'pt',
+                ]
             ))
             ->add('description', TextareaType::class, array(
                 'label' => 'Description',

@@ -19,15 +19,18 @@ class AdminMenuController extends AbstractController
      */
     public function indexAction(): Response
     {
-        $categories = $this
+        $repository = $this
             ->getDoctrine()
             ->getRepository(Category::class)
-            ->findOrderedByPosition()
         ;
 
-        return $this->render('admin_menu/index.html.twig', array(
-            'categories' => $categories
-        ));
+        $fr = $repository->findOrderedByPosition('fr');
+        $pt = $repository->findOrderedByPosition('pt');
+
+        return $this->render('admin_menu/index.html.twig', [
+            'categories_fr' => $fr,
+            'categories_pt' => $pt,
+        ]);
     }
 
     /**
