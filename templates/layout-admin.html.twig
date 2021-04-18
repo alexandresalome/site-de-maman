@@ -6,9 +6,9 @@
         <h1 class="admin-title"><a href="{{ path('admin_index') }}">Gestion de {{ sitename }}</a></h1>
         <ol class="breadcrumb">
             {% if admin_breadcrumb is null %}
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <li class="breadcrumb-item active" aria-current="page">Accueil</li>
             {% else %}
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('admin_index') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('admin_index') }}">Accueil</a></li>
                 {% for crumb in admin_breadcrumb %}
                     {% if crumb.href|default(null) %}
                         <li class="breadcrumb-item"><a href="{{ crumb.href }}">{{ crumb.label }}</a></li>

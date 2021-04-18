@@ -17,8 +17,8 @@
                 </h1>
             </div>
             <div class="edp--contact-group btn-group-vertical col-lg-2 col-md-3 col-sm-12 col--extra" role="group">
-                <a class="btn btn-outline-secondary" href="#">03.21.22.18.15</a>
-                <a class="btn btn-outline-secondary" href="#">Facebook</a>
+                <a class="btn btn-outline-secondary" href="tel:+(33)3.21.22.18.15">03.21.22.18.15</a>
+                <a class="btn btn-outline-secondary" target="_blank" href="https://www.facebook.com/enviedunplat.salome.5">Facebook</a>
             </div>
         </div>
     </div>
@@ -41,10 +41,11 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" title="Cuisine française" href="{{ path('category_show', {group: 'fr', slug: get_categories('fr')[0].slug}) }}">Cuisine française</a></li>
                     <li><a class="dropdown-item" title="Cuisine portugaise" href="{{ path('category_show', {group: 'pt', slug: get_categories('pt')[0].slug}) }}">Cuisine portugaise</a></li>
-                    <li><a class="dropdown-item" title="Portage de repas" href="#">Portage de repas</a></li>
+                    <li><a class="dropdown-item" title="Portage de repas" href="{{ path('portage') }}">Portage de repas</a></li>
                 </ul>
             </li>
         </ul>
+        {% if header_category_group != 'portage' %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,7 +60,8 @@
                 {% endfor %}
             </ul>
         </div>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% endif %}
+        <ul class="navbar-nav mb-2 mb-lg-0">
             {{ render(controller('App\\Controller\\CartController::panelAction')) }}
         </ul>
     </div>

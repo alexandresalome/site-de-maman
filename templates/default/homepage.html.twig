@@ -21,9 +21,15 @@
         <div class="col-md-4">
             <div class="edp--portage">
                 <h3>Portage de repas</h3>
-                <p>Nous proposons la livraison à domicile de plats, que c'est de la bonne nourriture qui nourrit bien.</p>
-                <p>Allez voir là donc :</p>
-                <p>XXX</p>
+                <p>
+                    Nous proposons le portage de repas à domicile de plats dans le Pas-de-Calais.
+                </p>
+                <p class="text-center">
+                    <a class="btn btn-outline-primary btn-lg" href="{{ path('portage') }}">Portage de repas à domicile</a>
+                </p>
+            </div>
+            <div class="edp--qsn col-lg-12 text-center mt-4">
+                <img src="{{ asset('build/images/photo.jpg') }}" class="img-fluid" title="Pascal et Rosa - {{ sitename }}" />
             </div>
         </div>
         <div class="col-md-4">
@@ -41,8 +47,20 @@
                 </div>
             </div>
         </div>
-        <div class="edp--qsn offset-lg-4 col-lg-4 mt-4">
-            <img src="{{ asset('build/images/photo.jpg') }}" class="img-fluid" title="Pascal et Rosa - {{ sitename }}" />
-        </div>
+    </div>
+    <div class="row mt-4">
+        {% set pictures = {
+            'build/images/plats/beignets-morue.jpg': 'Beignets de morue',
+            'build/images/plats/brochette-fruits.jpg': 'Brochette fruits',
+            'build/images/plats/cassoulet.jpg': 'Cassoulet',
+            'build/images/plats/feuillete-legumes.jpg': 'Feuilleté de légumes',
+            'build/images/plats/paon.jpg': 'Buffet décoratif',
+            'build/images/plats/verrine.jpg': 'Verrines betterave-chèvre',
+        } %}
+        {% for image, title in pictures %}
+            <div class="col-lg-4 col-md-6 col-sm-6 mt-4">
+                <img src="{{ asset(image) }}" alt="{{ title }}" title="{{ title }}" class="img-fluid" />
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -23,13 +23,33 @@ class PhotoService
         $this->uploadsUriPrefix = $uploadsUriPrefix;
     }
 
+    public function getPortage(string $size): ?string
+    {
+        return $this->doGet('portage', $size);
+    }
+
     public function get(Meal $meal, string $size): ?string
+    {
+        return $this->doGet($meal->getId(), $size);
+    }
+
+    public function upload(Meal $meal, File $file): void
+    {
+        $this->doUpload($file, $meal->getId());
+    }
+
+    public function uploadPortage(File $file): void
+    {
+        $this->doUpload($file, 'portage');
+    }
+
+    private function doGet(string $identifier, string $size): ?string
     {
         if (!isset($this->sizes[$size])) {
             return null;
         }
 
-        $filename = $meal->getId().'-'.$size.'.jpg';
+        $filename = $identifier.'-'.$size.'.jpg';
 
         if (file_exists($this->uploadsDir.'/'.$filename)) {
             return $this->uploadsUriPrefix.'/'.$filename;
@@ -38,14 +58,13 @@ class PhotoService
         return null;
     }
 
-    public function upload(Meal $meal, File $file): void
+    private function doUpload(File $file, string $identifier): void
     {
         $imagine = new Imagine();
-        //$mode    = ImageInterface::THUMBNAIL_INSET;
         $mode    = ImageInterface::THUMBNAIL_OUTBOUND;
 
         foreach ($this->sizes as $name => $size) {
-            $path = $this->uploadsDir.'/'.$meal->getId().'-'.$name.'.jpg';
+            $path = $this->uploadsDir.'/'.$identifier.'-'.$name.'.jpg';
 
             $dir = dirname($path);
             if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {

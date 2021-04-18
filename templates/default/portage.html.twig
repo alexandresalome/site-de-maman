@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title 'Portage de repas dans le Pas-de-Calais' %}
+
+{% set header_category_group = 'portage' %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Portage de repas à domicile</h1>
+    <div class="row mt-4">
+        <div class="col-lg-3">
+            <img src="{{ asset('build/images/camionnette.jpg') }}" alt="Camionnette réfrigérée de transport" class="img-fluid" />
+        </div>
+        <div class="col-lg-6">
+            <h2 class="text-center">
+                Menu de la semaine
+            </h2>
+            <img src="{{ get_portage_photo('800') }}?rand={{ random() }}" class="img-fluid" />
+        </div>
+        <div class="col-lg-3">
+            <img src="{{ asset('build/images/cuisine.jpg') }}" alt="Pascal et Rosa dans la cuisine" class="img-fluid" />
+        </div>
+    </div>
+    <h2 class="text-center mt-4">Exemple de repas réalisés</h2>
+    <div class="row mt-4">
+        {% set pictures = {
+            'build/images/portage/blanquette.jpg': 'Blanquette de veau',
+            'build/images/portage/filet-mignon.jpg': 'Filet mignon sauce Maroilles',
+            'build/images/portage/langue-legumes.jpg': 'Langue et ses légumes',
+            'build/images/portage/lapin-moutarde.jpg': 'Lapin à la moutarde',
+            'build/images/portage/maquereau-legumes.jpg': 'Maquereau et légumes',
+            'build/images/portage/navarin-de-la-mer.jpg': 'Navarin de la mer',
+        } %}
+        {% for image, title in pictures %}
+            <div class="col-lg-4 col-md-6 col-sm-6 mt-4">
+                <img src="{{ asset(image) }}" title="{{ title }}" class="img-fluid" />
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
