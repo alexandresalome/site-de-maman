@@ -5,11 +5,14 @@
 @import "node_modules/bootstrap/scss/type"
 @import "node_modules/bootstrap/scss/tables"
 @import "node_modules/bootstrap/scss/buttons"
+@import "node_modules/bootstrap/scss/button-group"
 @import "node_modules/bootstrap/scss/forms"
 @import "node_modules/bootstrap/scss/helpers"
+@import "node_modules/bootstrap/scss/images"
 @import "node_modules/bootstrap/scss/dropdown"
 @import "node_modules/bootstrap/scss/navbar"
 @import "node_modules/bootstrap/scss/card"
+@import "node_modules/bootstrap/scss/utilities"
 
 @import "_admin"
 @import "_header"
@@ -24,22 +27,33 @@
 .edp--flag-fr
     background: url('../images/fr.svg') no-repeat
 
-.edp--flag-pt, .edp--flag-fr, .edp--portage
+.edp--flag-pt, .edp--flag-fr, .edp--portage, .edp--qsn
     background-size: contain
-    background-position: center
+    background-position: top center
+
+
     > div
-        padding: 1rem
-        background: linear-gradient(135deg, rgba($palette-light,.95) 30%, rgba($palette-light,.8) 70%, rgba($palette-light,.95) 90%)
+        $step1: rgba($palette-light,.9) 10%
+        $step2: rgba($palette-light,.5) 40%
+        $step3: rgba($palette-light,0) 70%
+        $step4: rgba($palette-light,0) 90%
+        background: linear-gradient(135deg, $step1, $step2, $step3, $step4)
+        min-height: 20rem
 
     h3
         padding: .5rem 0
         font-weight: bold
         text-align: center
 
-    h4
+    h5
         text-align: center
         padding: .2rem .5rem
         > a
             text-decoration: none
+            background-color: rgba($palette-white, .7)
+            padding: 0 .4rem
             &:hover
                 text-decoration: underline
+
+.edp--contact-group
+    margin: 1rem 0

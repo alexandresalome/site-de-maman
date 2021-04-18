@@ -9,11 +9,11 @@
                 <div>
                     <h3>Plats français</h3>
                     {% for category in get_categories('fr') %}
-                        <h4>
+                        <h5>
                             <a href="{{ path('category_show', {group: 'fr', slug: category.slug}) }}">
                                 {{ category.name }}
                             </a>
-                        </h4>
+                        </h5>
                     {% endfor %}
                 </div>
             </div>
@@ -31,15 +31,18 @@
                 <div>
                     <h3>Plats portugais</h3>
                     {% for category in get_categories('pt') %}
-                        <h4>
+                        <h5>
                             <a href="{{ path('category_show', {group: 'pt', slug: category.slug}) }}">
                                 {{ category.name }}
                             </a>
-                        </h4>
+                        </h5>
 
                     {% endfor %}
                 </div>
             </div>
+        </div>
+        <div class="edp--qsn offset-lg-4 col-lg-4 mt-4">
+            <img src="{{ asset('build/images/photo.jpg') }}" class="img-fluid" title="Pascal et Rosa - {{ sitename }}" />
         </div>
     </div>
 {% endblock %}
