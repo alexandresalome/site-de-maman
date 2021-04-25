@@ -4,36 +4,36 @@
 
 {% block content %}
     <h2>Récapitulatif de votre commande</h2>
-    <p>Merci d'avoir choisi {{ sitename }} pour votre commande ! Prenez quelques minutes pour vérifier ce que vous avez choisi et nous donner vos coordonnées afin que nous puissions vous contacter en cas de nécessité !</p>
-    <div class="panel panel-primary">
-        <div class="panel-heading">Votre commande</div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th width="5%">Qté</th>
-                    <th width="70%">Produit</th>
-                    <th width="5%" class="text-right">PU</th>
-                    <th width="10%" class="text-right">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in cart.rows %}
+    <p>Merci d'avoir choisi {{ sitename }} pour votre commande ! Prenez quelques minutes pour vérifier ce que vous avez choisi et nous donner vos coordonnées afin que nous puissions vous contacter en cas de nécessité.</p>
+    <div class="card border-primary">
+        <div class="card-body">
+            <h3 class="card-title">Votre commande</h3>
+            <table class="table table-striped table-borderless">
+                <thead>
                     <tr>
-                        <td>{{ row.quantity }}x</td>
-                        <td>{{ row.meal.name }}</td>
-                        <td class="text-right">{{ row.meal.price|format_price }}</td>
-                        <td class="text-right">{{ row.price|format_price }}</td>
+                        <th width="5%">Qté</th>
+                        <th width="60%">Produit</th>
+                        <th width="15%" class="text-right">Prix unitaire</th>
+                        <th width="10%" class="text-right">Total</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="3" class="text-right">Total :</th>
-                    <th class="text-right">{{ cart.totalPrice|format_price }}</th>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="panel-footer text-right">
+                </thead>
+                <tbody>
+                    {% for row in cart.rows %}
+                        <tr>
+                            <td>{{ row.quantity }}x</td>
+                            <td>{{ row.meal.name }}</td>
+                            <td class="text-right">{{ row.meal.price|format_price }}</td>
+                            <td class="text-right">{{ row.price|format_price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3" class="text-right">Total :</th>
+                        <th class="text-right">{{ cart.totalPrice|format_price }}</th>
+                    </tr>
+                </tfoot>
+            </table>
             <a class="btn btn-primary" href="{{ path('cart_show') }}"><span class="glyphicon glyphicon-pencil"></span> Modifier la commande</a>
         </div>
     </div>
@@ -42,18 +42,24 @@
 {% endblock %}
 
 {% block order_widget %}
-    <h3>Vos coordonnées</h3>
+    <h3 class="mt-4">Vos coordonnées</h3>
     <p>Merci de saisir vos coordonnées ci-dessous afin de vous contacter en cas de nécessité :</p>
-    {{ form_row(form.fullname) }}
-    {{ form_row(form.phone) }}
-    {{ form_row(form.email) }}
+    <div class="mb-2">
+        {{ form_row(form.fullname) }}
+    </div>
+    <div class="mb-2">
+        {{ form_row(form.phone) }}
+    </div>
+    <div class="mb-2">
+        {{ form_row(form.email) }}
+    </div>
 
-    <h3>Date et heure d'enlèvement voulues</h3>
+    <h3 class="mt-4">Date et heure d'enlèvement voulues</h3>
     <p>Un délai de 48 heures minimum est demandé afin de préparer votre plat et de vous le fournir le plus frais possible.</p>
     {{ form_row(form.date) }}
-    <h3>Des remarques ?</h3>
+    <h3 class="mt-4">Des remarques ?</h3>
     {{ form_row(form.observations) }}
-    <h3>Information utile</h3>
+    <h3 class="mt-4">Information utile</h3>
     <div class="alert alert-info">
         <p><strong>Attention</strong>, cette commande ne sera validée qu'une fois que nous aurons confirmé la commande.</p>
         <p>Cette étape n'est normalement qu'une formalité, n'hésitez pas à nous contacter pour plus d'information.</p>

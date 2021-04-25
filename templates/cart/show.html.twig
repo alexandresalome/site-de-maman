@@ -5,47 +5,58 @@
 {% import "_menu_macros.html.twig" as menu_macros %}
 
 {% block content %}
-    <div class="menu">
-        <h2>Votre panier</h2>
-        {% for row in cart.rows %}
-            <div class="meal">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="card">
+        <div class="card-body">
+            <h2>Votre panier</h2>
+            {% for row in cart.rows %}
+                {% if loop.first %}
+                    <table class="table table-condensed table-borderless">
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Description</th>
+                        <th>Prix à l'unité</th>
+                        <th>Total</th>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td style="max-width: 6rem">
                         {{ menu_macros.meal_photo(row.meal) }}
-                    </div>
-                    <div class="col-xs-6 col-sm-8 col-md-9">
-                        <h4 class="pull-right">{{ row.price|format_price }}</h4>
-                        <h4>
-                            {{ row.quantity }}x {{ row.meal.name }}
-                            {{ menu_macros.meal_flags(row.meal) }}
-                            <small>{{ row.meal.price|format_price }}/unité</small>
-                        </h4>
-                        <p>{{ row.meal.description }}</p>
-                        <div class="input-group btn-edit-cart">
-                            <input data-url="{{ path('cart_setMeal') }}" data-meal="{{ row.meal.id }}" type="number" class="form-control" aria-label="Quantité" value="{{ row.quantity }}" name="quantity" />
-                            <div class="input-group-btn">
-                                <button class="btn btn-success">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    Modifier
-                                </button>
-                                <button class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                    Supprimer
-                                </button>
+                    </td>
+                    <td>
+                        <p class="h4 mb-2">{{ row.meal.name }}</p>
+                        <form class="cart-form mb-2" action="{{ path('cart_setMeal', {return: path('cart_show')}) }}" method="POST">
+                            <input type="hidden" name="mode" value="set" />
+                            <input type="hidden" name="meal" value="{{ row.meal.id }}" />
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">Qté :</span>
+                                <input type="number" name="quantity" class="form-control" value="{{ row.quantity }}" aria-label="Quantité" aria-describedby="basic-addon2">
+                                <button type="submit" class="btn btn-outline-primary">Modifier</button>
                             </div>
-                        </div>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="menu-price">{{ row.meal.price|format_price }}</div>
+                    </td>
+                    <td>
+                        <div class="menu-price">{{ row.price|format_price }}</div>
+                    </td>
+                </tr>
+                {% if loop.last %}
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td class="menu-total-label">Total :</td>
+                        <td>
+                            <div class="menu-price big-price">{{ cart.totalPrice|format_price }}</div>
+                        </td>
+                    </tr>
+                    </table>
+                    <div class="text-center">
+                        <p><a href="{{ path('cart_order') }}" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Passer commande</a></p>
                     </div>
-                </div>
-            </div>
-            {% if loop.last %}
-                <hr />
-                <h3 class="text-right">Total : {{ cart.totalPrice|format_price }}</h3>
-                <div class="text-center">
-                    <p><a href="{{ path('cart_order') }}" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Passer commande</a></p>
-                </div>
-            {% endif %}
-        {% else %}
-            <p><strong>Votre panier est vide</strong>. Utilisez le menu pour accéder aux diférents plats et faire votre sélection.</p>
-        {% endfor %}
+                {% endif %}
+            {% else %}
+                <p><strong>Votre panier est vide</strong>. Utilisez le menu pour accéder aux diférents plats et faire votre sélection.</p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -61,9 +61,9 @@ class Cart
         $this->addRow($row);
     }
 
-    public function setMeal(Meal $meal, $quantity)
+    public function setMeal(Meal $meal, int $quantity): void
     {
-        if ($quantity == 0) {
+        if ($quantity === 0) {
             foreach ($this->rows as $i => $row) {
                 if ($row->getMeal() !== $meal) {
                     continue;

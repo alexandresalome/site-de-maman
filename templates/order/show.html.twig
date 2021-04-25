@@ -4,17 +4,17 @@
 
 {% block content %}
     <div class="page-header">
-        <h2>Commande du {{ order.createdAt|format_date('full', 'none') }}, à {{ order.createdAt|format_date('none', 'short') }}</h2>
+        <h2>Commande du {{ order.createdAt|format_date('full') }}, à {{ order.createdAt|format_datetime('none', 'short') }}</h2>
     </div>
 
-    <h3>Vos coordonnées</h3>
+    <h3 class="mt-4">Coordonnées</h3>
     <ul>
         <li><strong>Nom et prénom</strong> : {{ order.fullname }}</li>
         <li><strong>Téléphone</strong> : {{ order.phone }}</li>
         <li><strong>E-mail</strong> : {{ order.email }}</li>
     </ul>
 
-    <h3>Votre commande</h3>
+    <h3 class="mt-4">Votre commande</h3>
     <p><strong>Date et heure d'enlèvement</strong> : {{ order.date }}</p>
     <table class="table table-striped">
         <thead>

@@ -2,8 +2,8 @@
     {% set photo = get_meal_photo(meal, '400') %}
     {% set photo_max = get_meal_photo(meal, '800') %}
     {% if photo %}
-        <a data-controller="zoom" title="{{ meal.name }}" data-zoom="{{ photo_max }}" class="thumbnail" href="#">
-            <img class="img-fluid" src="{{ photo }}" alt="{{ meal.name }}">
+        <a data-controller="zoom" title="{{ meal.name }}" data-zoom="{{ photo_max }}" href="#modal">
+            <img class="card-img-top" src="{{ photo }}" alt="{{ meal.name }}">
         </a>
     {% else %}
         <div class="no-photo">

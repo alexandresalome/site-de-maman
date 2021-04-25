@@ -1,6 +1,7 @@
 @import "_theme"
 @import "node_modules/bootstrap/scss/bootstrap-reboot"
 @import "node_modules/bootstrap/scss/bootstrap-grid"
+@import "node_modules/bootstrap/scss/bootstrap-utilities"
 @import "node_modules/bootstrap/scss/breadcrumb"
 @import "node_modules/bootstrap/scss/type"
 @import "node_modules/bootstrap/scss/tables"
@@ -18,22 +19,14 @@
 @import "node_modules/bootstrap/scss/transitions"
 @import "node_modules/bootstrap/scss/modal"
 
-.text-center
-    text-align: center
+@import "_admin"
+@import "_header"
 
 .show
     display: block
 
-
-@import "_admin"
-@import "_header"
-
 .edp--content
     margin-top: $padding-bottom-navigation
-
-h1, h2, h3, h4, h5, h6
-    color: $palette-blue
-
 
 .edp--flag-pt
     background: url('../images/pt.svg') no-repeat
@@ -56,7 +49,6 @@ h1, h2, h3, h4, h5, h6
 
     h3
         padding: .5rem 0
-        font-weight: bold
         text-align: center
 
     h5
@@ -71,3 +63,65 @@ h1, h2, h3, h4, h5, h6
 
 .edp--contact-group
     margin: 1rem 0
+
+
+.no-photo
+    background: rgba(black, .1)
+    text-align: center
+    font-size: 1.2rem
+    color: rgba(black, .5)
+
+    line-height: 12rem
+    height: 12rem
+    @include media-breakpoint-down('lg')
+        height: 6rem
+        line-height: 6rem
+
+.menu
+    .card
+        border-bottom: 0
+
+    .input-group > *:first-child
+        border-left: 0
+
+    .input-group > *:last-child
+        border-right: 0
+
+
+    .card-body > h5
+        margin: 0
+
+.menu-price
+    padding: 0 .2rem
+    font-size: 1.2rem
+    font-weight: bold
+    color: rgba(black, .9)
+    margin: 0 0 .4rem .5rem
+    background-color: rgba(yellow, .3)
+    display: inline-block
+
+    &.big-price
+        font-size: 1.6rem
+
+#cart-panel.not-empty
+    > a
+        background-color: rgba(yellow, .3)
+
+    .dropdown-menu
+        width: 30rem
+
+#cart-panel-button.show
+    @include media-breakpoint-down('md')
+        display: none
+
+#cart-panel-details
+    padding: .5rem
+
+.cart-form
+    @include media-breakpoint-up('md')
+        width: 20rem
+
+.menu-total-label
+    font-size: 1.6rem
+    font-weight: bold
+    text-align: right

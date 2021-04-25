@@ -51,7 +51,7 @@ class CartController extends AbstractController
 
         $this->saveCart($request, $cart);
 
-        return $this->forward(__CLASS__ .'::panelAction');
+        return $this->redirect($request->query->get('return'));
     }
 
     /**

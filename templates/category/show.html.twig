@@ -13,40 +13,35 @@
         {% if category.description %}
             <p>{{ category.description|nl2br }}</p>
         {% endif %}
-        {% for meal in category.meals %}
-            <div class="meal">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-4 col-md-3">
-                        {{ menu_macros.meal_photo(meal) }}
-                    </div>
-                    <div class="col-xs-6 col-sm-8 col-md-9">
-                        <h4>
-                            {{ meal.name }}
-                            {{ menu_macros.meal_flags(meal) }}
-                            <small>{{ meal.price|format_price }}</small>
-                        </h4>
-                        <p>{{ meal.description }}</p>
-                        <div class="add-to-cart">
-                            <div class="input-group btn-add-to-cart">
-                                <input data-url="{{ path('cart_setMeal') }}" data-mode="add" data-meal="{{ meal.id }}" type="number" class="form-control" aria-label="Quantité" value="1" name="quantity" />
-                                <div class="input-group-btn">
-                                    <button class="btn btn-success">
-                                        <i class="add glyphicon glyphicon-shopping-cart"></i>
-                                        <i style="display: none;" class="wait glyphicon glyphicon-hourglass"></i>
-                                        <i style="display: none;" class="ko glyphicon glyphicon-alert"></i>
-                                        <i style="display: none;" class="ok glyphicon glyphicon-ok"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div style="display: none;" class="alert alert-success"><p>Le plat a bien été ajouté au panier !</p></div>
+        <div class="row row-cols-lg-4 row-cols-md-2 g-4 row-cols-1">
+            {% for meal in category.meals %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-picture">
+                            {{ menu_macros.meal_photo(meal) }}
                         </div>
+                        <div class="card-body">
+                            <p class="float-end menu-price">{{ meal.price|format_price }}</p>
+                            <h5>
+                                {{ meal.name }}
+                                {{ menu_macros.meal_flags(meal) }}
+                            </h5>
+                            {% if meal.description %}
+                                <p>{{ meal.description }}</p>
+                            {% endif %}
+                        </div>
+                        <form action="{{ path('cart_setMeal', {return: path('category_show', {group: category.group, slug: category.slug})}) }}" method="POST">
+                            <input type="hidden" name="mode" value="add" />
+                            <input type="hidden" name="meal" value="{{ meal.id }}" />
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">Qté :</span>
+                                <input type="number" name="quantity" class="form-control" value="1" aria-label="Quantité" aria-describedby="basic-addon2">
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        {% else %}
-            {% if not category.description %}
-            <p><em>Cette catégorie est vide. Revenez prochainement, vous trouverez peut-être des nouveaux plats !</em></p>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

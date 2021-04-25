@@ -11,13 +11,15 @@
         {{ encore_entry_script_tags('app') }}
 
         <div id="modal" class="modal fade" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 id="modal-title" class="modal-title">Modal title</h5>
-                        <button id="modal-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="modal-body">
+            <div class="modal-backdrop">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center" id="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <h5 id="modal-title" class="flex-grow-1">Modal title</h5>
+                            <button id="modal-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                     </div>
                 </div>
             </div>
