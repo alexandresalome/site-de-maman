@@ -38,3 +38,7 @@ services:
         $uploadsUriPrefix: '/upload'
 
     App\Service\Loader\HolidayLoaderInterface: '@App\Service\Loader\DoctrineHolidayLoader'
+
+    App\Service\Sms\FreeSms:
+        $user: '%env(FREE_SMS_USER)%'
+        $password: '%env(FREE_SMS_PASSWORD)%'
