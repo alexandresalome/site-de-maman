@@ -14,6 +14,7 @@ class PhotoService
     private string $uploadsUriPrefix;
     private array $sizes = [
         '300'  => [300, 100],
+        '400' => [400, 300],
         '800' => [800,  600],
     ];
 
@@ -45,13 +46,17 @@ class PhotoService
 
     private function doGet(string $identifier, string $size): ?string
     {
-        if (!isset($this->sizes[$size])) {
+        if ($size !== '400' && !isset($this->sizes[$size])) {
             return null;
         }
 
         $filename = $identifier.'-'.$size.'.jpg';
+        $exists = file_exists($this->uploadsDir.'/'.$filename);
+        if ($size === '400' && !$exists && $this->convert($identifier)) {
+            $exists = true;
+        }
 
-        if (file_exists($this->uploadsDir.'/'.$filename)) {
+        if ($exists) {
             return $this->uploadsUriPrefix.'/'.$filename;
         }
 
@@ -76,5 +81,18 @@ class PhotoService
                 ->save($path)
             ;
         }
+    }
+
+    private function convert(string $identifier): bool
+    {
+        $origin = $this->uploadsDir.'/'.$identifier.'-800.jpg';
+        if (!file_exists($origin)) {
+            return false;
+        }
+
+        $file = new File($origin);
+        $this->doUpload($file, $identifier);
+
+        return true;
     }
 }

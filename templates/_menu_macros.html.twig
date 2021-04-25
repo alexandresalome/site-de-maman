@@ -1,9 +1,9 @@
 {% macro meal_photo(meal) %}
-    {% set photo = get_meal_photo(meal, '300') %}
+    {% set photo = get_meal_photo(meal, '400') %}
     {% set photo_max = get_meal_photo(meal, '800') %}
     {% if photo %}
-        <a data-zoom="{{ photo_max }}" class="thumbnail" href="#">
-            <img src="{{ photo }}" alt="Photo du plat {{ meal.name }}">
+        <a data-controller="zoom" title="{{ meal.name }}" data-zoom="{{ photo_max }}" class="thumbnail" href="#">
+            <img class="img-fluid" src="{{ photo }}" alt="{{ meal.name }}">
         </a>
     {% else %}
         <div class="no-photo">
@@ -13,5 +13,5 @@
 {% endmacro %}
 
 {% macro meal_flags(meal) %}
-    {% if meal.portuguese %}<img src="{{ asset('build/images/flag-portugal.png') }}" width="24" height="16" /> {% endif %}
+    {% if meal.portuguese %}<img src="{{ asset('build/images/flag-portugal.png') }}" alt="Plat portugais" width="24" height="16" /> {% endif %}
 {% endmacro %}
