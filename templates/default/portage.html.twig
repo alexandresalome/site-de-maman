@@ -5,22 +5,27 @@
 {% set header_category_group = 'portage' %}
 
 {% block content %}
-    <h1 class="text-center mb-4">Portage de repas à domicile</h1>
-    <div class="row mt-4">
-        <div class="col-lg-3">
+    <div class="row mt-4 d-flex">
+        <div class="col-sm-6 col-md-3 text-center order-md-1 order-sm-2 mt-4">
             <img src="{{ asset('build/images/camionnette.jpg') }}" alt="Camionnette réfrigérée de transport" class="img-fluid" />
         </div>
-        <div class="col-lg-6">
+        <div class="col-sm-12 col-md-6 text-center order-md-2 order-sm-1">
             <h2 class="text-center">
                 Menu de la semaine
             </h2>
-            <img src="{{ get_portage_photo('800') }}?rand={{ random() }}" class="img-fluid" />
+            {% if not get_portage_photo('800') %}
+                <p class="text-center mb-4 mt-4"><em>Aucun menu pour l'instant. Revenez plus tard !</em></p>
+            {% else %}
+                <a data-controller="zoom" title="Menu de la semaine" data-zoom="{{ get_portage_photo('800') }}" href="#modal">
+                    <img src="{{ get_portage_photo('800') }}?rand={{ random() }}" class="img-fluid" />
+                </a>
+            {% endif %}
         </div>
-        <div class="col-lg-3">
+        <div class="col-sm-6 col-md-3 text-center order-md-3 order-sm-3 mt-4">
             <img src="{{ asset('build/images/cuisine.jpg') }}" alt="Pascal et Rosa dans la cuisine" class="img-fluid" />
         </div>
     </div>
-    <h2 class="text-center mt-4">Exemple de repas réalisés</h2>
+    <h2 class="text-center mt-4">Exemples de repas réalisés</h2>
     <div class="row mt-4">
         {% set pictures = {
             'build/images/portage/blanquette.jpg': 'Blanquette de veau',
@@ -31,8 +36,10 @@
             'build/images/portage/navarin-de-la-mer.jpg': 'Navarin de la mer',
         } %}
         {% for image, title in pictures %}
-            <div class="col-lg-4 col-md-6 col-sm-6 mt-4">
-                <img src="{{ asset(image) }}" title="{{ title }}" class="img-fluid" />
+            <div class="col-lg-2 col-md-4 col-sm-6 mt-4">
+                <a data-controller="zoom" title="{{ title }}" data-zoom="{{ asset(image) }}" href="#modal">
+                    <img class="img-fluid" src="{{ asset(image) }}" alt="{{ title }}" title="{{ title }}">
+                </a>
             </div>
         {% endfor %}
     </div>

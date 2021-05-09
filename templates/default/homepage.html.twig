@@ -22,7 +22,7 @@
             <div class="edp--portage">
                 <h3>Portage de repas</h3>
                 <p>
-                    Nous proposons le portage de repas à domicile de plats dans le Pas-de-Calais.
+                    Nous proposons le portage de repas dans un large secteur.
                 </p>
                 <p class="text-center">
                     <a class="btn btn-outline-primary btn-lg" href="{{ path('portage') }}">Portage de repas à domicile</a>
@@ -58,8 +58,10 @@
             'build/images/plats/verrine.jpg': 'Verrines betterave-chèvre',
         } %}
         {% for image, title in pictures %}
-            <div class="col-lg-4 col-md-6 col-sm-6 mt-4">
-                <img src="{{ asset(image) }}" alt="{{ title }}" title="{{ title }}" class="img-fluid" />
+            <div class="col-lg-2 col-md-3 col-sm-6 mt-4">
+                <a data-controller="zoom" title="{{ title }}" data-zoom="{{ asset(image) }}" href="#modal">
+                    <img src="{{ asset(image) }}" alt="{{ title }}" title="{{ title }}" class="img-fluid" />
+                </a>
             </div>
         {% endfor %}
     </div>

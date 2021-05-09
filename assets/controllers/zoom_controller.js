@@ -23,11 +23,10 @@ export default class extends Controller {
             console.log('Missing one of the <div> elements required for modals:', modal, modalBody, modalClose, modalTitle);
         }
 
-        modalTitle.innerText = title;
-
-        const html = '<img class="img-fluid" src="' + zoom + '" alt="Agrandissement" />';
+        const html = '<img class="img-fluid" src="' + zoom + '" alt="' + title + '" />';
 
         this.element.addEventListener('click', (event) => {
+            modalTitle.innerText = title;
             event.preventDefault();
             event.stopPropagation();
 
